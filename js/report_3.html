@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <title>상권 보고서 생성기</title>
+  <!-- 헨드폰에서 위치고정시키기 위한 명령어? -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <link rel="stylesheet" href="report_style.css">
+</head>
+
+<body>
+  <div id="top">
+    <h1>상권 보고서 생성기</h1>
+  </div>
+  <!-- 입력 폼 컨테이너 -->
+  <div class="form-container">
+
+    <!-- 상권명 입력 -->
+    <div class="form-group">
+      <input type="text" id="businessArea" placeholder=" " required>
+      <label for="businessArea">상권명</label>
+    </div>
+
+    <!-- 방문업소 입력 -->
+    <div class="form-group">
+      <input type="number" id="visitingEstablishments" value="30" placeholder=" " required>
+      <label for="visitingEstablishments">방문업소 (개)</label>
+    </div>
+
+    <!-- 근무자1 이름 입력 -->
+    <div class="form-group">
+      <input type="text" id="worker1Name" placeholder=" " required>
+      <label for="worker1Name">근무자1 이름</label>
+    </div>
+
+    <!-- 근무자2 이름 입력 -->
+    <div class="form-group">
+      <input type="text" id="worker2Name" placeholder=" " required>
+      <label for="worker2Name">근무자2 이름</label>
+    </div>
+
+    <!-- 근무자1 전환 입력 -->
+    <div class="form-group">
+      <input type="number" id="worker1Conversion" oninput="inputUpdate()" placeholder=" " required>
+      <label for="worker1Conversion">근무자1 전환</label>
+    </div>
+
+    <!-- 근무자2 전환 입력 -->
+    <div class="form-group">
+      <input type="number" id="worker2Conversion" oninput="inputUpdate()" placeholder=" " required>
+      <label for="worker2Conversion">근무자2 전환</label>
+    </div>
+
+    <!-- 근무자1 추가 입력 -->
+    <div class="form-group">
+      <input type="number" id="worker1Addition" placeholder=" " required>
+      <label for="worker1Addition">근무자1 추가</label>
+    </div>
+
+    <!-- 근무자2 추가 입력 -->
+    <div class="form-group">
+      <input type="number" id="worker2Addition" placeholder=" " required>
+      <label for="worker2Addition">근무자2 추가</label>
+    </div>
+
+    <!-- 테이블 수 입력 -->
+    <div class="form-group">
+      <input type="number" id="goodDayTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="goodDayTables">좋은데이 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="busanTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="busanTables">부산갈매기 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="maesilTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="maesilTables">매실마을 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="whiteTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="whiteTables">화이트 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="talkSeriesTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="talkSeriesTables">톡시리즈 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="muhakOtherTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="muhakOtherTables">무학 기타 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="chamisulTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="chamisulTables">참이슬 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="jinroTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="jinroTables">진로 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="hitejinroOtherTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="hitejinroOtherTables">하이트진로 기타 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="daeseonC1Tables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="daeseonC1Tables">대선(C1포함) (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="daeseonOtherTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="daeseonOtherTables">대선 기타 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="saeroTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="saeroTables">새로 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="cheonghaTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="cheonghaTables">청하(별빛청하 포함) (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="lotteOtherTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="lotteOtherTables">롯데 기타 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="otherTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="otherTables">기타 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="notTables" oninput="inputUpdate()" placeholder=" " required>
+      <label for="notTables">미음용 (T)</label>
+    </div>
+
+    <div class="form-group">
+      <input type="number" id="hangoverCure" oninput="inputUpdate()" placeholder=" " required>
+      <label for="hangoverCure">숙취해소제 (개)</label>
+    </div>
+
+  </div>
+  <!-- 보고서 출력 영역 -->
+  <div id="reportOutput"></div>
+
+  <div id="bottom1">
+    <div id="bottom2">
+      <div>
+        <h3>무학 음용비: <span id="muhakPercentage">0%</span></h3>
+        <h3>전환율: <span id="conversionRate">0%</span></h3>
+      </div>
+      <!-- 버튼 그룹 -->
+      <div class="button-group">
+        <button id="generateReport" onclick="generateReport()">보고서 생성</button>
+        <button id="copyReport">복사하기</button>
+        <button id="clearFields">필드 초기화</button>
+      </div>
+    </div>
+  </div>
+  <script src="report_script.js"></script>
+</body>
+
+</html>
