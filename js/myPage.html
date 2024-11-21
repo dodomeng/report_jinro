@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>마이페이지</title>
+</head>
+<body>
+    <h1>마이페이지</h1>
+    <div id="workdays"></div>
+    <div id="rankingScore"></div>
+    <div id="salaryCalculator"></div>
+
+    <script>
+        function calculateSalary() {
+            let today = new Date();
+            let day = today.getDate(); // 오늘 날짜를 가져옴
+
+            let lastMonthWorkdays = 20;  // 예시 값
+            let thisMonthWorkdays = 10;  // 예시 값
+            let salary = 39000;
+
+            let salaryInfo;
+
+            if (day <= 17) {
+                salaryInfo = `저번달 출근일수: ${lastMonthWorkdays}, 이번달 출근일수: ${thisMonthWorkdays}, 예상 월급(세전): ${(lastMonthWorkdays * salary)}원`;
+            } else {
+                salaryInfo = `이번달 출근일수: ${thisMonthWorkdays}, 다음달 예상 월급(세전): ${(thisMonthWorkdays * salary)}원`;
+            }
+
+            document.getElementById("salaryCalculator").innerHTML = salaryInfo;
+        }
+
+        calculateSalary();
+    </script>
+</body>
+</html>
