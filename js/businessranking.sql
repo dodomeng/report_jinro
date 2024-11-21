@@ -74,6 +74,41 @@ JOIN User_Workdays uw
     ON u.user_id = uw.user_id
 WHERE uw.month = YEAR(CURRENT_DATE) * 100 + MONTH(CURRENT_DATE);
 
+-- 예제 사용자 데이터 삽입
+INSERT INTO Users (user_id, password_hash, name) 
+VALUES 
+    ('1001', SHA2('1001', 256), '김인서'),
+    ('1002', SHA2('1002', 256), '노도균'),
+    ('1003', SHA2('1003', 256), '배정우');
+
+-- 예제 상권 데이터 삽입
+INSERT INTO Businesses (name) 
+VALUES
+    ('경대 정문'),
+    ('경대 후문'),
+    ('하대');
+
+-- 예제 작업 기록 데이터 삽입
+INSERT INTO Work_Records (user_id, business_id, conversion_count, extra_count, record_date)
+VALUES
+    ('1001', 1, 10, 5, '2024-11-01'),
+    ('1002', 1, 8, 3, '2024-11-01'),
+    ('1003', 2, 7, 2, '2024-11-02'),
+    ('1001', 3, 12, 6, '2024-11-18'),
+    ('1003', 2, 9, 4, '2024-11-19'),
+    ('1002', 1, 7, 3, '2024-11-20');
+
+-- 출근 일수(User_Workdays) 계산 및 업데이트
+INSERT INTO User_Workdays (user_id, month, workdays)
+SELECT
+    user_id,
+    YEAR(record_date) * 100 + MONTH(record_date) AS month,
+    COUNT(DISTINCT record_date) AS workdays
+FROM Work_Records
+GROUP BY user_id, YEAR(record_date), MONTH(record_date)
+ON DUPLICATE KEY UPDATE
+    workdays = workdays;  -- 여기서 VALUES(workdays)를 사용하지 않고, 그냥 컬럼명 그대로 사용
+
 -- 월급 계산 결과를 확인
 SELECT * FROM Salary_Calculation;
 
