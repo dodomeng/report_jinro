@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>제품 페이지</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f7f5f8;
+            text-align: center;
+        }
+        .logo {
+            margin: 20px 0;
+            font-size: 2.5rem;
+            font-weight: bold;
+            color: #002f77;
+        }
+        .product-section {
+            background: linear-gradient(90deg, #ffe4e1, #fff);
+            padding: 30px;
+            text-align: center;
+        }
+        .product-img {
+            max-width: 80%;
+            border-radius: 10px;
+            transition: opacity 1s ease;
+        }
+        .icons {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .icon {
+            text-align: center;
+            padding: 10px;
+            background: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            width: 120px;
+            transition: transform 0.3s ease;
+        }
+        .icon:hover {
+            transform: scale(1.1);
+        }
+        .icon img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+        .icon-text {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo">좋은데이</div>
+    <div class="product-section">
+        <img src="테스트1.jpg" alt="TockSoda" class="product-img" id="productImage">
+    </div>
+    <div class="icons">
+        <div class="icon">
+            <img src="icon1.png" alt="마이페이지">
+            <div class="icon-text">마이페이지</div>
+        </div>
+        <div class="icon">
+            <img src="icon2.png" alt="보고서 생성">
+            <div class="icon-text">보고서 생성</div>
+        </div>
+        <div class="icon">
+            <img src="icon3.png" alt="교육영상">
+            <div class="icon-text">교육영상</div>
+        </div>
+        <div class="icon">
+            <img src="icon4.png" alt="베이스위치">
+            <div class="icon-text">베이스위치</div>
+        </div>
+        <div class="icon">
+            <img src="icon5.png" alt="랭킹">
+            <div class="icon-text">랭킹</div>
+        </div>
+    </div>
+
+    <script>
+    const images = ["테스트1.jpg", "테스트2.jpg", "테스트4.png"]; // 테스트4 추가
+    const backgrounds = [
+        "linear-gradient(90deg, #ffe4e1, #fff)", // 테스트1 배경
+        "linear-gradient(90deg, #fff9e6, #e8f7e8)", // 테스트2 배경
+        "linear-gradient(90deg, #d4f0ff, #e6f7ff)"  // 테스트4 배경 (밝은 블루 계열)
+    ];
+    let currentIndex = 0;
+
+    function changeImage() {
+        const productImage = document.getElementById("productImage");
+        const productSection = document.querySelector(".product-section");
+
+        currentIndex = (currentIndex + 1) % images.length; // 다음 이미지로 순환
+        productImage.style.opacity = 0; // 부드러운 전환 효과
+        setTimeout(() => {
+            productImage.src = images[currentIndex];
+            productSection.style.background = backgrounds[currentIndex]; // 배경 변경
+            productImage.style.opacity = 1;
+        }, 500); // 0.5초 후 이미지 및 배경 교체
+    }
+
+    // 5초마다 이미지와 배경 변경
+    setInterval(changeImage, 5000);
+    </script>
+</body>
+</html>
