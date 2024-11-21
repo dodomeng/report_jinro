@@ -23,6 +23,10 @@ connection.connect((err) => {
 app.use(express.static(path.join(__dirname, 'public')));
 
 // /login.html 경로 처리
+app.get('/', (req, res) => {
+    res.sendFile(path.join(__dirname, 'public', 'home.html'));
+});
+
 app.get('/login.html', (req, res) => {
     res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
@@ -37,5 +41,5 @@ app.post('/login', (req, res) => {
 
 // 서버 실행
 app.listen(3000, () => {
-    console.log('서버가 http://localhost:3000에서 실행 중입니다.');
+    console.log('서버주소(Ctrl + Rclick): http://localhost:3000');
 });
