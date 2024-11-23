@@ -1,59 +1,132 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>로그인</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background: #f5f5f5;
-            text-align: center;
-            padding: 50px;
-        }
-
-        form {
-            background: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            max-width: 300px;
-            margin: auto;
-        }
-
-        input {
-            display: block;
-            width: 100%;
-            margin: 10px 0;
-            padding: 10px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-
-        button {
-            padding: 10px;
-            background: #007BFF;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        button:hover {
-            background: #0056b3;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+  <link rel="stylesheet" href="login.css">
 </head>
-
 <body>
-    <h1>로그인</h1>
+  
+  <div class="login-container">
+    <img src="테스트4.png" alt="로그인 이미지">
+    <h1>좋은데이 진주팀</h1>
     <form id="loginForm">
-        <input type="text" id="username" placeholder="아이디" required>
-        <input type="password" id="password" placeholder="비밀번호" required>
-        <button type="submit">로그인</button>
-    </form>
-    <script src="login.js"></script>
-</body>
+      <input type="text" id="username" placeholder="이름" required >
+      <input type="password" id="password" placeholder="비밀번호" required>
+      <button type="submit">로그인</button>
 
+      <button type="button" class="signup-button">회원가입</button> <!-- type="button" 추가 -->
+    </form>
+  </div>
+  
+  <script>
+    // 로그인 처리
+    const handleLogin = () => {
+        const name = document.getElementById('username').value;
+        const password = document.getElementById('password').value;
+
+        if (!name || !password) {
+            alert("아이디와 비밀번호를 입력해주세요.");
+            return;
+        }
+
+        fetch('/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ name, password })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.error) {
+                alert(data.error);
+            } else {
+                alert(data.message);
+                // 로그인 성공 후 페이지 이동 등 처리
+            }
+        })
+        .catch(error => console.error('로그인 요청 오류:', error));
+    };
+
+    // 회원가입 버튼 클릭 시 signup.html로 이동
+    document.querySelector('.signup-button').addEventListener('click', (e) => {
+        e.preventDefault(); // 기본 폼 제출을 방지
+        window.location.href = 'signup.html'; // signup.html로 이동
+    });
+  </script>
+
+</body>
 </html>
+
+
+<!-- <!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>로그인</title>
+  <link rel="stylesheet" href="login.css">
+</head>
+<body>
+  
+  <div class="login-container">
+    <img src="테스트4.png" alt="로그인 이미지">
+    <h1>좋은데이 진주팀</h1>
+    <form id="loginForm">
+      <input type="text" id="username" placeholder="이름" required >
+      <input type="password" id="password" placeholder="비밀번호" required>
+      <button type="submit">로그인</button>
+
+      <button class="signup-button">회원가입</button>
+    </form>
+  </div>
+  <script>
+    // 예시: 로그인 요청 보내기 (fetch 사용)
+const handleLogin = () => {
+    const name = document.getElementById('username').value;
+    const password = document.getElementById('password').value;
+
+    if (!name || !password) {
+        alert("아이디와 비밀번호를 입력해주세요.");
+        return;
+    }
+
+    fetch('/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ name, password })
+    })
+    .then(response => response.json())
+    .then(data => {
+        if (data.error) {
+            alert(data.error);
+        } else {
+            alert(data.message);
+            // 로그인 성공 후 페이지 이동 등 처리
+        }
+    })
+    .catch(error => console.error('로그인 요청 오류:', error));
+};
+
+    // document.getElementById('loginForm').addEventListener('submit', async (e) => {
+    //     e.preventDefault();
+    //     const username = document.getElementById('username').value;
+    //     const password = document.getElementById('password').value;
+
+    //     const response = await fetch('/login', {
+    //         method: 'POST',
+    //         headers: { 'Content-Type': 'application/json' },
+    //         body: JSON.stringify({ username, password }),
+    //     });
+
+    //     if (response.ok) {
+    //         alert('로그인 성공!');
+    //         window.location.href = '/report.html'; // 보고서 작성 페이지로 이동
+    //     } else {
+    //         alert('로그인 실패. 아이디와 비밀번호를 확인해주세요.');
+    //     }
+    // });
+</script>
+
+</body>
+</html> -->
