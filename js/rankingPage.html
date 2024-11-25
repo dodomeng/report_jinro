@@ -31,7 +31,7 @@
             <i class="bx bx-folder"></i>
             기록
         </a>
-        <a href="#myInformation">
+        <a href="myPage.html">
             <i class="bx bx-user"></i>
             내 정보
         </a>
@@ -43,7 +43,7 @@
 
     <div class="mainMenuRanking">
         <img src="https://cdn-icons-png.flaticon.com/512/1603/1603847.png" alt="아이콘">
-        전환률 랭킹
+        전환수 랭킹
     </div>
 
     <!-- 랭킹 출력 -->
@@ -53,87 +53,7 @@
         </ul>
     </div>
 
-    <script>
-        // 드롭다운 메뉴 동작
-        const dropdownBtn = document.getElementById("dropdownBtn");
-        const dropdownMenu = document.getElementById("dropdown");
-        const toggleArrow = document.getElementById("menuArrow");
-
-        const toggleDropdown = function () {
-            dropdownMenu.classList.toggle("show");
-            toggleArrow.classList.toggle("arrow");
-        };
-
-        dropdownBtn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            toggleDropdown();
-        });
-
-        document.documentElement.addEventListener("click", function () {
-            if (dropdownMenu.classList.contains("show")) {
-                toggleDropdown();
-            }
-        });
-
-        // 랭킹 데이터 처리
-        document.addEventListener('DOMContentLoaded', function () {
-            // 로컬 데이터로 랭킹 생성
-            const rankingData = [
-                { user: "사용자 A", conversionRate: 78 },
-                { user: "사용자 B", conversionRate: 65 },
-                { user: "사용자 C", conversionRate: 88 },
-                { user: "사용자 D", conversionRate: 55 },
-                { user: "사용자 E", conversionRate: 90 },
-                { user: "사용자 F", conversionRate: 72 },
-                { user: "사용자 G", conversionRate: 80 },
-                { user: "사용자 H", conversionRate: 68 },
-                { user: "사용자 I", conversionRate: 92 },
-                { user: "사용자 J", conversionRate: 84 }
-            ];
-
-            rankingData.sort((a, b) => b.conversionRate - a.conversionRate);
-
-            const top5RankingData = rankingData.slice(0, 5);
-
-            const rankingList = document.getElementById('rankingList');
-
-            top5RankingData.forEach((data, index) => {
-                const listItem = document.createElement('li');
-                listItem.innerHTML = `
-                    <span>순위: ${index + 1}</span>
-                    <span>사용자: ${data.user}</span>
-                    <span>전환율: ${data.conversionRate}%</span>
-                `;
-                rankingList.appendChild(listItem);
-            });
-
-            // 서버 데이터로 랭킹 생성 (주석 처리된 코드 활성화 가능)
-            /*
-            fetch('/api/rankings')
-                .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Network response was not ok');
-                    }
-                    return response.json(); // JSON 데이터를 파싱
-                })
-                .then(data => {
-                    // 기존 리스트 초기화
-                    rankingList.innerHTML = '';
-                    data.forEach((item, index) => {
-                        const listItem = document.createElement('li');
-                        listItem.innerHTML = `
-                            <span>순위: ${index + 1}</span>
-                            <span>사용자: ${item.user}</span>
-                            <span>전환율: ${item.conversionRate}%</span>
-                        `;
-                        rankingList.appendChild(listItem);
-                    });
-                })
-                .catch(error => {
-                    console.error('There was a problem with the fetch operation:', error);
-                });
-            */
-        });
-    </script>
+    <script src="rankingPageScript.js"></script>
+    <script src="mainPageScript.js"></script>
 </body>
 </html>

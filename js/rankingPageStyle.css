@@ -86,7 +86,7 @@ a {
     position: fixed; 
     top: 30px; 
     right: 20px; 
-    z-index: 200;
+    z-index: 1000;
 }
 
 .bx {
