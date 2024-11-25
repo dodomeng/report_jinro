@@ -3,19 +3,20 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>상권 보고서 생성기</title>
-  <!-- 헨드폰에서 위치고정시키기 위한 명령어? -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>상권 보고서 생성기</title>
   <link rel="stylesheet" href="report_style.css">
 </head>
 
 <body>
+  <script src="./report_script.js"></script>
+  <!-- 상단 헤더 -->
   <div id="top">
     <h1>상권 보고서 생성기</h1>
   </div>
+
   <!-- 입력 폼 컨테이너 -->
   <div class="form-container">
-
     <!-- 상권명 입력 -->
     <div class="form-group">
       <input type="text" id="businessArea" placeholder=" " required>
@@ -27,139 +28,212 @@
       <input type="number" id="visitingEstablishments" value="30" placeholder=" " required>
       <label for="visitingEstablishments">방문업소 (개)</label>
     </div>
-
-    <!-- 근무자1 이름 입력 -->
-    <div class="form-group">
-      <input type="text" id="worker1Name" placeholder=" " required>
-      <label for="worker1Name">근무자1 이름</label>
-    </div>
-
-    <!-- 근무자2 이름 입력 -->
-    <div class="form-group">
-      <input type="text" id="worker2Name" placeholder=" " required>
-      <label for="worker2Name">근무자2 이름</label>
-    </div>
-
-    <!-- 근무자1 전환 입력 -->
-    <div class="form-group">
-      <input type="number" id="worker1Conversion" oninput="inputUpdate()" placeholder=" " required>
-      <label for="worker1Conversion">근무자1 전환</label>
-    </div>
-
-    <!-- 근무자2 전환 입력 -->
-    <div class="form-group">
-      <input type="number" id="worker2Conversion" oninput="inputUpdate()" placeholder=" " required>
-      <label for="worker2Conversion">근무자2 전환</label>
-    </div>
-
-    <!-- 근무자1 추가 입력 -->
-    <div class="form-group">
-      <input type="number" id="worker1Addition" placeholder=" " required>
-      <label for="worker1Addition">근무자1 추가</label>
-    </div>
-
-    <!-- 근무자2 추가 입력 -->
-    <div class="form-group">
-      <input type="number" id="worker2Addition" placeholder=" " required>
-      <label for="worker2Addition">근무자2 추가</label>
-    </div>
-
-    <!-- 테이블 수 입력 -->
-    <div class="form-group">
-      <input type="number" id="goodDayTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="goodDayTables">좋은데이 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="busanTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="busanTables">부산갈매기 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="maesilTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="maesilTables">매실마을 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="whiteTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="whiteTables">화이트 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="talkSeriesTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="talkSeriesTables">톡시리즈 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="muhakOtherTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="muhakOtherTables">무학 기타 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="chamisulTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="chamisulTables">참이슬 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="jinroTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="jinroTables">진로 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="hitejinroOtherTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="hitejinroOtherTables">하이트진로 기타 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="daeseonC1Tables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="daeseonC1Tables">대선(C1포함) (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="daeseonOtherTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="daeseonOtherTables">대선 기타 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="saeroTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="saeroTables">새로 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="cheonghaTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="cheonghaTables">청하(별빛청하 포함) (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="lotteOtherTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="lotteOtherTables">롯데 기타 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="otherTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="otherTables">기타 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="notTables" oninput="inputUpdate()" placeholder=" " required>
-      <label for="notTables">미음용 (T)</label>
-    </div>
-
-    <div class="form-group">
-      <input type="number" id="hangoverCure" oninput="inputUpdate()" placeholder=" " required>
-      <label for="hangoverCure">숙취해소제 (개)</label>
-    </div>
-
   </div>
-  <!-- 보고서 출력 영역 -->
-  <div id="reportOutput"></div>
 
+  <!-- 근무 내용 섹션 -->
+  <div class="container">
+    <div class="section">
+      <div class="section-title">근무 내용</div>
+      <div class="section-content">
+        <!-- 근무자1 이름 -->
+        <div class="item">
+          <label for="worker1Name">근무자1 이름</label>
+          <input type="text" id="worker1Name" class="input-field" placeholder="근무자1 이름" required>
+        </div>
+
+        <!-- 근무자2 이름 -->
+        <div class="item">
+          <label for="worker2Name">근무자2 이름</label>
+          <input type="text" id="worker2Name" class="input-field" placeholder="근무자2 이름" required>
+        </div>
+
+        <!-- 근무자1 전환 -->
+        <div class="item">
+          <label for="worker1Conversion">근무자1 전환</label>
+          <input type="number" id="worker1Conversion" class="input-field" oninput="inputUpdate()" placeholder="테이블" required>
+        </div>
+
+        <!-- 근무자2 전환 -->
+        <div class="item">
+          <label for="worker2Conversion">근무자2 전환</label>
+          <input type="number" id="worker2Conversion" class="input-field" oninput="inputUpdate()" placeholder="테이블" required>
+        </div>
+
+        <!-- 근무자1 추가 -->
+        <div class="item">
+          <label for="worker1Addition">근무자1 추가</label>
+          <input type="number" id="worker1Addition" class="input-field" placeholder="병" required>
+        </div>
+
+        <!-- 근무자2 추가 -->
+        <div class="item">
+          <label for="worker2Addition">근무자2 추가</label>
+          <input type="number" id="worker2Addition" class="input-field" placeholder="병" required>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 전환 세부사항 섹션 -->
+  <div class="section">
+    <div class="section-title">전환 세부사항</div>
+    <div class="section-content">
+      <div class="item">
+        <label>좋은데이</label>
+        <input type="number" id="gooddayConversion" class="input-field" placeholder="테이블">
+      </div>
+      <div class="item">
+        <label>부산갈매기</label>
+        <input type="number" id="busangalmaeConversion" class="input-field" placeholder="테이블">
+      </div>
+      <div class="item">
+        <label>매실마을</label>
+        <input type="number" id="maesilConversion" class="input-field" placeholder="테이블">
+      </div>
+      <div class="item">
+        <label>화이트</label>
+        <input type="number" id="whiteConversion" class="input-field" placeholder="테이블">
+      </div>
+      <div class="item">
+        <label>톡시리즈</label>
+        <input type="number" id="talkseriesConversion" class="input-field" placeholder="테이블">
+      </div>
+    </div>
+
+  <!-- 브랜드별 입력 섹션 -->
+  <div class="container">
+    <!-- 무학 섹션 -->
+    <div class="section">
+      <div class="section-title">무학</div>
+      <div class="section-content">
+        <div class="item">
+          <label>좋은데이</label>
+          <input type="number" id="gooddayTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>부산갈매기</label>
+          <input type="number" id="busangalmaeTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>매실마을</label>
+          <input type="number" id="maesilTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>화이트</label>
+          <input type="number" id="whiteTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>톡시리즈</label>
+          <input type="number" id="talkseriesTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>무학 기타</label>
+          <input type="number" id="muhakOtherTables" class="input-field" placeholder="테이블">
+        </div>
+      </div>
+    </div>
+
+    <!-- 하이트진로 섹션 -->
+    <div class="section">
+      <div class="section-title">하이트진로</div>
+      <div class="section-content">
+        <div class="item">
+          <label>참이슬</label>
+          <input type="number" id="chamisulTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>진로</label>
+          <input type="number" id="jinroTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>하이트진로 기타</label>
+          <input type="number" id="hitejinroOtherTables" class="input-field" placeholder="테이블">
+        </div>
+      </div>
+    </div>
+
+    <!-- 대선주조 섹션 -->
+    <div class="section">
+      <div class="section-title">대선주조</div>
+      <div class="section-content">
+        <div class="item">
+          <label>대선(C1 포함)</label>
+          <input type="number" id="daeseonC1Tables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>대선 기타</label>
+          <input type="number" id="daeseonOtherTables" class="input-field" placeholder="테이블">
+        </div>
+      </div>
+    </div>
+
+    <!-- 롯데 섹션 -->
+    <div class="section">
+      <div class="section-title">롯데</div>
+      <div class="section-content">
+        <div class="item">
+          <label>새로</label>
+          <input type="number" id="saeroTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>청하(별빛청하 포함)</label>
+          <input type="number" id="cheonghaTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>롯데 기타</label>
+          <input type="number" id="lotteOtherTables" class="input-field" placeholder="테이블">
+        </div>
+      </div>
+    </div>
+
+    <!-- 기타 섹션 -->
+    <div class="section">
+      <div class="section-title">기타</div>
+      <div class="section-content">
+        <div class="item">
+          <label>기타</label>
+          <input type="number" id="otherTables" class="input-field" placeholder="테이블">
+        </div>
+        <div class="item">
+          <label>미음용</label>
+          <input type="number" id="notDrinkTables" class="input-field" placeholder="테이블">
+        </div>
+      </div>
+    </div>
+
+    <!-- 판촉물 사용량 섹션 -->
+    <div class="section">
+      <div class="section-title">판촉물 사용량</div>
+      <div class="section-content">
+        <div class="item">
+          <label>숙취해소제</label>
+          <input type="number" id="hangoverCure" class="input-field" placeholder="개">
+        </div>
+        <div class="item">
+          <label>물티슈</label>
+          <input type="number" id="tissue" class="input-field" placeholder="개">
+        </div>
+        <div class="item">
+          <label>젤리</label>
+          <input type="number" id="jelly" class="input-field" placeholder="개">
+        </div>
+        <div class="item">
+          <label>커피쿠폰</label>
+          <input type="number" id="coffeeCoupon" class="input-field" placeholder="개">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 하단 기능 -->
   <div id="bottom1">
     <div id="bottom2">
+      <!-- 비율 및 전환율 -->
       <div>
-        <h3>무학 음용비: <span id="muhakPercentage">0%</span></h3>
-        <h3>전환율: <span id="conversionRate">0%</span></h3>
+        <span id="muhakPercentageText">무학 음용비: <span id="muhakPercentage">0%</span></span>
+        <span id="conversionText">전환율: <span id="conversionRate">0%</span></span>
       </div>
+
       <!-- 버튼 그룹 -->
       <div class="button-group">
         <button id="generateReport" onclick="generateReport()">보고서 생성</button>
@@ -168,7 +242,9 @@
       </div>
     </div>
   </div>
-  <script src="report_script.js"></script>
+
+  <!-- 보고서 출력 영역 -->
+  <div id="reportOutput"></div>
 </body>
 
 </html>

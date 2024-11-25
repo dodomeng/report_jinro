@@ -84,9 +84,14 @@ VALUES
 -- 예제 상권 데이터 삽입
 INSERT INTO Businesses (name) 
 VALUES
-    ('경대 정문'),
-    ('경대 후문'),
-    ('하대');
+    ('경상대'),
+    ('호탄동'),
+    ('과기대');
+    ('평거동');
+    ('상대동');
+    ('하대동A');
+    ('하대동B');
+    ('혁신도시');
 
 -- 예제 작업 기록 데이터 삽입
 INSERT INTO Work_Records (user_id, business_id, conversion_count, extra_count, record_date)
