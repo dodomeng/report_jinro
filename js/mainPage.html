@@ -6,9 +6,6 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link href="mainPageStyle.css" rel="stylesheet" />
     <title>Main Page</title>
-    <style>
-        /* 스타일 추가를 원하면 여기에 작성 */
-    </style>
 </head>
 <body>
 
@@ -35,7 +32,7 @@
           <i class="bx bx-folder"></i>
           기록
         </a>
-        <a href="#myInformation">
+        <a href="myPage.html">
           <i class="bx bx-user"></i>
           내 정보
         </a>
@@ -49,7 +46,7 @@
     <div class="mainMenu">
         <a href="rankingPage.html" class="mainMenuRanking">
             <img src="https://cdn-icons-png.flaticon.com/512/1603/1603847.png" alt="아이콘">
-            전환률 랭킹
+            전환수 랭킹
         </a>
 
         <a href="#generateReport" class="mainMenuGenerateReport">
@@ -63,26 +60,6 @@
         </a>
     </div>
 
-    <script>
-        const dropdownBtn = document.getElementById("dropdownBtn");
-        const dropdownMenu = document.getElementById("dropdown");
-        const toggleArrow = document.getElementById("menuArrow");
-
-        const toggleDropdown = function () {
-            dropdownMenu.classList.toggle("show");
-            toggleArrow.classList.toggle("arrow");
-        };
-
-        dropdownBtn.addEventListener("click", function (e) {
-            e.stopPropagation();
-            toggleDropdown();
-        });
-
-        document.documentElement.addEventListener("click", function () {
-            if (dropdownMenu.classList.contains("show")) {
-                toggleDropdown();
-            }
-        });
-    </script>
+    <script src="mainPageScript.js"></script>
 </body>
 </html>
