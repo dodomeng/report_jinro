@@ -23,15 +23,26 @@ const db = mysql.createConnection({
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
 
+
+//===========================GET===========================
 // 로그인 페이지 제공
 app.get('/login', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'login.html'));
 });
-
 // 회원가입 페이지 제공
 app.get('/signup', (req, res) => {
   res.sendFile(path.join(__dirname, 'public', 'signup.html'));
 });
+//인덱스 페이지
+app.get('/', (req, res) => {
+  
+  res.sendFile(path.join(__dirname, 'public', 'home.html'));
+  // res.redirect("/login")
+});
+
+
+
+//===========================POST===========================
 
 // 로그인 API (POST)
 app.post('/login', (req, res) => {
@@ -45,14 +56,10 @@ app.post('/login', (req, res) => {
     // 입력한 아이디를 기준으로 DB에서 사용자 정보 조회
     const query = 'SELECT * FROM Users WHERE user_id = ?';
     db.query(query, [user_id], (err, results) => {
-
-        console.log("A")
         if (err) {
             console.error('로그인 DB 오류:', err);
             return res.status(500).json({ error: '서버 오류가 발생했습니다.' });
         }
-        console.log("A")
-
         // 사용자가 존재하지 않으면 아이디가 틀렸다고 응답
         if (results.length === 0) {
             return res.status(401).json({ error: '아이디가 틀렸습니다.' });
@@ -126,10 +133,12 @@ app.post('/signup', (req, res) => {
   //   });
     
 
-
-
-
 // 서버 시작
-app.listen(3000, () => {
-  console.log('서버가 3000번 포트에서 실행 중입니다.');
+// console.log(app)
+// app.listen(3000, () => {
+//   console.log('서버가 3000번 포트에서 실행 중입니다.');
+// });
+
+var listener = app.listen(3000, function(){
+  console.log(`서버가 ${listener.address().port} 포트에서 시작됍니다!\n링크: http://localhost:${listener.address().port}`); //Listening on port 8888
 });
