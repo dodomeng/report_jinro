@@ -57,16 +57,18 @@ app.post('/login', (req, res) => {
         if (results.length === 0) {
             return res.status(401).json({ error: '아이디가 틀렸습니다.' });
         }
-        // 비밀번호가 일치하는지 확인
         const user = results[0];
-
+        
+        //오류 사유: 디비 호출값 문제
         // user = {
         //   user_id: 1111,
         //   created_at: 2024-11-25T12:29:44.000Z,
         //   password: '0ffe1abd1a08215353c233d6e009613e95eec4253832a761af28ff37ac5a150c'
         // }
-        //password O password_hash X
 
+        //password_hash -> password
+
+        // 비밀번호가 일치하는지 확인
         if (user.password !== hashedPassword) {
           console.log(user.password, hashedPassword)
 
