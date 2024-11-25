@@ -1,26 +1,39 @@
-/* 전체 페이지 스타일 */
+/* 전체 스타일 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: Arial, sans-serif;
-    margin: 20px;
-    background-color: #f5f5f5;
-  }
-
-
+  background-color: white;
+  align-items: center;
+  font-family: Arial, sans-serif;
+  justify-content: center; 
+  height: 100vh; 
+}
+/* 로고 스타일 */
+.mainLogo {
+margin-top: 20px;
+display: flex; 
+justify-content: center; 
+width: 100%; 
+}
+/* 로고 스타일 */
+.mainLogo img {
+  max-width: 100%; 
+  height: 110px; 
+  padding: 15px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+}
+/* a 태그 스타일 */
 a{
   color: black;
   text-decoration: none;
 }
-
-
-  #top{
-    width: 100%;
-    margin: auto;
-    background-color: #007BFF;
-    z-index: 100 ;
-    color: #fff;
-  }
  
-  #bottom1 {
+#bottom1 {
   max-width: 160%;
   width: 100%;
   position:fixed;
@@ -46,30 +59,26 @@ a{
   margin: 0; /* 마진 제거 */
   box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
 }
-  h1 {
-    text-align: center;
-    margin-bottom: 30px;
-  }
 
-  /* 입력 폼 컨테이너 스타일 */
+/* 입력 폼 컨테이너 스타일 */
 .form-container {
   background-color: #fff;
   padding: 20px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
   max-width: 800px;
   margin: 0 auto 30px auto; /* 중앙 정렬 및 아래 마진 */
-  margin-top: 100px; /* 위쪽 마진 */
+  margin: 15px 15px;
   position: relative; /* 상대 위치 유지 */
 }
 
-  .form-group {
+.form-group {
     position: relative;
     margin-bottom: 20px;
-  }
+}
 
-  /* 입력 필드 스타일 */
-  .form-group input {
+/* 입력 필드 스타일 */
+.form-group input {
     width: 100%;
     padding: 10px 10px 10px 5px;
     font-size: 16px;
@@ -77,16 +86,16 @@ a{
     border-bottom: 2px solid #ccc;
     background: transparent;
     transition: border-color 0.3s;
-  }
+}
 
-  /* 포커스 시 밑줄 색상 변경 */
-  .form-group input:focus {
+/* 포커스 시 밑줄 색상 변경 */
+.form-group input:focus { 
     outline: none;
     border-bottom: 2px solid #007BFF;
-  }
+}
 
-  /* 레이블 스타일 */
-  .form-group label {
+/* 레이블 스타일 */
+.form-group label {
     position: absolute;
     top: 10px;
     left: 5px;
@@ -94,20 +103,20 @@ a{
     color: #999;
     pointer-events: none;
     transition: 0.3s;
-  }
+}
 
-  /* 입력 또는 포커스 시 레이블 이동 */
-  .form-group input:focus ~ label,
-  .form-group input:not(:placeholder-shown) ~ label {
+/* 입력 또는 포커스 시 레이블 이동 */
+.form-group input:focus ~ label,
+.form-group input:not(:placeholder-shown) ~ label {
     top: -20px;
     font-size: 12px;
     color: #007BFF;
-  }
+}
 
-  /* 버튼 스타일 */
-  .button-group {
+ /* 버튼 스타일 */
+.button-group {
     margin-top: 20px;
-  }
+}
 
   .button-group button {
     padding: 5px 10px;
@@ -162,7 +171,6 @@ a{
     font-weight: 600;
   }
 
-
   /* 보고서 출력 영역 스타일 */
   #reportOutput {
     background-color: #fff;
@@ -212,9 +220,11 @@ a{
 .section {
 background-color: #fff;
 border: 1px solid #ddd;
-border-radius: 5px;
+border-radius: 10px;
 overflow: hidden;
-box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+margin-bottom: 10px;
+margin: 15px 15px;
 }
 
 .section-title {
@@ -224,11 +234,12 @@ text-align: center;
 padding: 10px;
 font-size: 1.2rem;
 font-weight: bold;
+margin-bottom: 10px;
 }
 
 .section-content {
 display: grid;
-grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+grid-template-columns: repeat(2, 1fr);  /* 한 줄에 2개씩 배치 */
 gap: 10px;
 padding: 15px;
 }
@@ -236,7 +247,7 @@ padding: 15px;
 .item {
 background-color: #f1f1f1;
 border: 1px solid #ddd;
-border-radius: 5px;
+border-radius: 10px;
 padding: 10px;
 text-align: center;
 font-size: 0.9rem;
@@ -252,12 +263,6 @@ width: 80%;
 border: 1px solid #ccc;
 border-radius: 4px;
 text-align: center;
-}
-
-/* Responsive design */
-@media (max-width: 600px) {
-.section-content {
-  grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
 }
 
 .item {
@@ -281,14 +286,14 @@ input[type=number]::-webkit-outer-spin-button {
 margin: 0;
 }
 
-.container{
-  margin-bottom: 10px;
-}
+/* Responsive design */
+@media (max-width: 600px) {
+  .section-content {
+    grid-template-columns: repeat(2, 1fr); /* 두 개씩 나열 */
+  }
 
-.section{
-  margin-bottom: 10px;
-}
-
-.section-title{
-  margin-bottom: 10px;
+  .item {
+    font-size: 0.8rem;
+    padding: 8px;
+  }
 }
