@@ -19,7 +19,7 @@ a{
 }
 
 .mainLogo {
-    margin-top: 100px
+    margin-top: 50px
 }
 
 .mainLogo img {
@@ -31,7 +31,7 @@ a{
 }
 
 .realLogo{
-    margin-top: 50px;
+    margin-top: 40px;
 }
 
 .realLogo img{
@@ -46,7 +46,7 @@ a{
     display: grid;
     grid-template-columns: repeat(3, 1fr);  
     grid-gap: 15px;  
-    margin-top: 50px;  
+    margin-top: 40px;  
     width: 100%;
     max-width: 350px;  
 }
