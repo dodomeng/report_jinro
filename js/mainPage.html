@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link href="mainPageStyle.css" rel="stylesheet" />
+    <title>Main Page</title>
+    <style>
+        /* 스타일 추가를 원하면 여기에 작성 */
+    </style>
+</head>
+<body>
+
+    <!-- 로고 영역 -->
+    <header class="logoHeader"> 
+        <div class="logo">
+            <a href="mainPage.html">
+                좋은데이 상권 보고서
+            </a>
+        </div>
+    </header>
+
+    <!-- 드롭 다운 메뉴 영역 -->
+    <button class="dropdownBtn" id="dropdownBtn">
+        메뉴
+        <i class="bx bx-chevron-down" id="menuArrow"></i>
+    </button>
+    <div class="dropdown" id="dropdown">
+        <a href="#education">
+          <i class="bx bx-book"></i>
+          교육 자료
+        </a>
+        <a href="#records">
+          <i class="bx bx-folder"></i>
+          기록
+        </a>
+        <a href="#myInformation">
+          <i class="bx bx-user"></i>
+          내 정보
+        </a>
+        <a href="#settings">
+          <i class="bx bx-cog"></i>
+          설정
+        </a>
+    </div>
+
+    <!-- 메인 메뉴 영역 -->
+    <div class="mainMenu">
+        <a href="rankingPage.html" class="mainMenuRanking">
+            <img src="https://cdn-icons-png.flaticon.com/512/1603/1603847.png" alt="아이콘">
+            전환률 랭킹
+        </a>
+
+        <a href="#generateReport" class="mainMenuGenerateReport">
+            <img src="https://cdn-icons-png.flaticon.com/512/6754/6754699.png" alt="아이콘">
+            보고서 생성
+        </a>
+
+        <a href="#baseLocation" class="mainMenuBaseLocation">
+            <img src="https://cdn-icons-png.flaticon.com/512/3434/3434958.png" alt="아이콘">
+            베이스 위치
+        </a>
+    </div>
+
+    <script>
+        const dropdownBtn = document.getElementById("dropdownBtn");
+        const dropdownMenu = document.getElementById("dropdown");
+        const toggleArrow = document.getElementById("menuArrow");
+
+        const toggleDropdown = function () {
+            dropdownMenu.classList.toggle("show");
+            toggleArrow.classList.toggle("arrow");
+        };
+
+        dropdownBtn.addEventListener("click", function (e) {
+            e.stopPropagation();
+            toggleDropdown();
+        });
+
+        document.documentElement.addEventListener("click", function () {
+            if (dropdownMenu.classList.contains("show")) {
+                toggleDropdown();
+            }
+        });
+    </script>
+</body>
+</html>
