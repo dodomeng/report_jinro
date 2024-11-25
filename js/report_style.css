@@ -4,13 +4,18 @@ body {
     margin: 20px;
     background-color: #f5f5f5;
   }
+
+
+a{
+  color: black;
+  text-decoration: none;
+}
+
+
   #top{
     width: 100%;
     margin: auto;
     background-color: #007BFF;
-    position: fixed;
-    top: 0px;
-    left: 0px;
     z-index: 100 ;
     color: #fff;
   }
@@ -204,10 +209,10 @@ body {
       color:white;
     }
 
-    .section {
+.section {
 background-color: #fff;
 border: 1px solid #ddd;
-border-radius: 8px;
+border-radius: 5px;
 overflow: hidden;
 box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
@@ -274,4 +279,16 @@ input[type=number]::-webkit-inner-spin-button,
 input[type=number]::-webkit-outer-spin-button {
 -webkit-appearance: none;
 margin: 0;
+}
+
+.container{
+  margin-bottom: 10px;
+}
+
+.section{
+  margin-bottom: 10px;
+}
+
+.section-title{
+  margin-bottom: 10px;
 }
