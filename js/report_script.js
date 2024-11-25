@@ -4,39 +4,59 @@ function inputUpdate() {
     const businessArea = document.getElementById('businessArea').value;
     const visitingEstablishments = parseInt(document.getElementById('visitingEstablishments').value || 0);
 
+    // 근무 내용
     const worker1Name = document.getElementById('worker1Name').value;
     const worker1Conversion = parseInt(document.getElementById('worker1Conversion').value || 0);
     const worker1Addition = parseInt(document.getElementById('worker1Addition').value || 0);
-
     const worker2Name = document.getElementById('worker2Name').value;
     const worker2Conversion = parseInt(document.getElementById('worker2Conversion').value || 0);
     const worker2Addition = parseInt(document.getElementById('worker2Addition').value || 0);
 
-    const goodDayTables = parseInt(document.getElementById('goodDayTables').value || 0);
-    const busanTables = parseInt(document.getElementById('busanTables').value || 0);
+    // 전환 세부사항
+    const gooddayConversion = parseInt(document.getElementById('gooddayConversion').value || 0);
+    const busangalmaeConversion = parseInt(document.getElementById('busangalmaeConversion').value || 0);
+    const maesilConversion = parseInt(document.getElementById('maesilConversion').value || 0);
+    const whiteConversion = parseInt(document.getElementById('whiteConversion').value || 0);
+    const talkseriesConversion = parseInt(document.getElementById('talkseriesConversion').value || 0);
+    // 무학
+    const gooddayTables = parseInt(document.getElementById('gooddayTables').value || 0);
+    const busangalmaeTables = parseInt(document.getElementById('busangalmaeTables').value || 0);
     const maesilTables = parseInt(document.getElementById('maesilTables').value || 0);
     const whiteTables = parseInt(document.getElementById('whiteTables').value || 0);
-    const talkSeriesTables = parseInt(document.getElementById('talkSeriesTables').value || 0);
+    const talkseriesTables = parseInt(document.getElementById('talkseriesTables').value || 0);
     const muhakOtherTables = parseInt(document.getElementById('muhakOtherTables').value || 0);
+
+    // 하이트진로
     const chamisulTables = parseInt(document.getElementById('chamisulTables').value || 0);
     const jinroTables = parseInt(document.getElementById('jinroTables').value || 0);
     const hitejinroOtherTables = parseInt(document.getElementById('hitejinroOtherTables').value || 0);
+    
+    // 대선주조
     const daeseonC1Tables = parseInt(document.getElementById('daeseonC1Tables').value || 0);
     const daeseonOtherTables = parseInt(document.getElementById('daeseonOtherTables').value || 0);
+
+    // 롯데
     const saeroTables = parseInt(document.getElementById('saeroTables').value || 0);
     const cheonghaTables = parseInt(document.getElementById('cheonghaTables').value || 0);
     const lotteOtherTables = parseInt(document.getElementById('lotteOtherTables').value || 0);
+    
+    // 기타
     const otherTables = parseInt(document.getElementById('otherTables').value || 0);
-    const notTables = parseInt(document.getElementById('notTables').value || 0);
-
+    const notDrinkTables = parseInt(document.getElementById('notDrinkTables').value || 0);
+    
+    // 판촉물 사용량
     const hangoverCure = parseInt(document.getElementById('hangoverCure').value || 0);
+    const tissue = parseInt(document.getElementById('tissue').value || 0);
+    const jelly = parseInt(document.getElementById('jelly').value || 0);
+    const coffeeCoupon = parseInt(document.getElementById('coffeeCoupon').value || 0);
+    
     // 음용 테이블 수 계산
-    const drinkTables = goodDayTables + busanTables + maesilTables + whiteTables + talkSeriesTables +
+    const drinkTables = gooddayTables + busangalmaeTables + maesilTables + whiteTables + talkseriesTables +
         muhakOtherTables + chamisulTables + jinroTables + hitejinroOtherTables +
         daeseonC1Tables + daeseonOtherTables + saeroTables + cheonghaTables +
         lotteOtherTables + otherTables
     // 총 테이블 수 계산
-    const totalTables = drinkTables + notTables;
+    const totalTables = drinkTables + notDrinkTables;
 
     // 전환 테이블 계산
     const totalConversion = worker1Conversion + worker2Conversion;
@@ -45,13 +65,13 @@ function inputUpdate() {
     // 점유비 계산을 위한 데이터 구조
     const 점유비 = {
         "무학": {
-            total: goodDayTables + busanTables + maesilTables + whiteTables + talkSeriesTables + muhakOtherTables,
+            total: gooddayTables + busangalmaeTables + maesilTables + whiteTables + talkseriesTables + muhakOtherTables,
             items: {
-                "좋은데이": goodDayTables,
-                "부산갈매기": busanTables,
+                "좋은데이": gooddayTables,
+                "부산갈매기": busangalmaeTables,
                 "매실마을": maesilTables,
                 "화이트": whiteTables,
-                "톡시리즈": talkSeriesTables,
+                "톡시리즈": talkseriesTables,
                 "기타": muhakOtherTables
             }
         },
@@ -92,7 +112,7 @@ function inputUpdate() {
         }
     }
     // 전환율 계산
-    const conversionRate = totalConversion / (drinkTables - (goodDayTables + busanTables + maesilTables + whiteTables + talkSeriesTables + muhakOtherTables)) * 100;
+    const conversionRate = totalConversion / (drinkTables - (gooddayTables + busangalmaeTables + maesilTables + whiteTables + talkseriesTables + muhakOtherTables)) * 100;
 
     // 실시간 결과 업데이트
     document.getElementById('muhakPercentage').textContent = `${점유비["무학"].percentage || 0}%`;
@@ -108,15 +128,15 @@ function inputUpdate() {
     report = `< ${formattedDate} ${businessArea || "상권명"} 상권보고 >
 
 1. 방문업소 : ${visitingEstablishments || 0}개
-2. 테이블수 : ${totalTables || 0}T (미음용 ${notTables || 0}T)
+2. 테이블수 : ${totalTables || 0}T (미음용 ${notDrinkTables || 0}T)
 3. 전환테이블
 가. 전환 T : ${totalConversion || 0}T 
 [${worker1Name} : ${worker1Conversion || 0}T, ${worker2Name} : ${worker2Conversion || 0}T]
-- 좋은데이 ( ${goodDayTables || 0}T )
-- 화이트 ( ${whiteTables || 0}T )
-- 부산갈매기 ( ${busanTables || 0}T )
-- 매실마을 ( ${maesilTables || 0}T )
-- 톡톡(석류/블루베리 등) ( ${talkSeriesTables || 0}T )
+- 좋은데이 ( ${gooddayConversion || 0}T )
+- 화이트 ( ${whiteConversion || 0}T )
+- 부산갈매기 ( ${busangalmaeConversion || 0}T )
+- 매실마을 ( ${maesilConversion || 0}T )
+- 톡톡(석류/블루베리 등) ( ${talkseriesConversion || 0}T )
 - 추가 : ${totalAddition || 0}T
 [${worker1Name} : ${worker1Addition || 0}T, ${worker2Name} : ${worker2Addition || 0}T]
 4. 점유비
@@ -146,6 +166,9 @@ function inputUpdate() {
 
 5. 타사 판촉인원 / 판촉물 및 판촉 내용
 숙취해소제 : ${hangoverCure || 0}개 
+물티슈 : ${tissue || 0}개 
+젤리 : ${jelly || 0}개 
+커피쿠폰 : ${coffeeCoupon || 0}개 
 
 6. 특이사항 
 `;
@@ -200,4 +223,3 @@ document.getElementById('clearFields').addEventListener('click', clearFields);
 
 // 페이지 로드 시 날짜 설정
 window.onload = setTodayDate;
-
