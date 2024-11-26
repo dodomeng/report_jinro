@@ -195,27 +195,6 @@ function copyReport() {
     });
 }
 
-// 입력 필드 초기화 함수
-function clearFields() {
-    const inputs = document.querySelectorAll('.form-group input');
-    inputs.forEach(input => {
-        if (input.id !== 'date') {
-            input.value = '';
-        }
-    });
-    document.getElementById('reportOutput').textContent = '';
-}
-// 마우스 스크롤 시 이벤트 
-// document.addEventListener('wheel', function (event) {
-//     if (event.deltaY > 0) {
-//         document.getElementById("top").style.position = "fixed";
-//         document.getElementById("top").style.top = "0px"; // 제목 폼을 top 0 으로 고정
-//         document.getElementById("bottom1").style.position = "fixed";
-//         document.getElementById("bottom1").style.bottom = "0px"; // 보고서 생성 폼을 bottom 0으로 고정
-//     }
-// });
-
-
 // 이벤트 리스너 설정
 document.getElementById('generateReport').addEventListener('click', generateReport);
 document.getElementById('copyReport').addEventListener('click', copyReport);

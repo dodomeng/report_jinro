@@ -7,11 +7,11 @@
 
 body {
   background-color: white;
-  align-items: center;
   font-family: Arial, sans-serif;
-  justify-content: center; 
-  height: 100vh; 
+  height: 100vh;
+  /* padding-bottom: 80px; 하단 고정 영역의 높이를 고려한 여백 추가 */
 }
+
 /* 로고 스타일 */
 .mainLogo {
 margin-top: 20px;
@@ -33,43 +33,15 @@ a{
   text-decoration: none;
 }
  
-#bottom1 {
-  max-width: 160%;
-  width: 100%;
-  position:fixed;
-  z-index: 200;
-  left: 0;
-  bottom: 0; /* 화면 하단에 위치 */
-  display: flex;
-  justify-content: center; /* 중앙 정렬 */
-  align-items: center; /* 수직 중앙 정렬 */
-  padding: 20px; /* 내부 여백 추가 */
-  box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
-  margin: 0px;
-  padding:0px;
-}
-
-#bottom2 {
-  background-color: #fff;
-  padding: 20px; /* 내부 여백 */
-  border-radius: 8px; /* 모서리 둥글게 */
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 */
-  width: 100%; /* 너비를 100%로 설정 */
-  max-width: 800px; /* 최대 너비 설정 */
-  margin: 0; /* 마진 제거 */
-  box-sizing: border-box; /* 패딩을 포함한 너비 계산 */
-}
-
 /* 입력 폼 컨테이너 스타일 */
 .form-container {
-  background-color: #fff;
   padding: 20px;
   border-radius: 10px;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
   max-width: 800px;
-  margin: 0 auto 30px auto; /* 중앙 정렬 및 아래 마진 */
+  margin: 0 auto 30px auto;
   margin: 15px 15px;
-  position: relative; /* 상대 위치 유지 */
+  position: relative; 
 }
 
 .form-group {
@@ -91,7 +63,8 @@ a{
 /* 포커스 시 밑줄 색상 변경 */
 .form-group input:focus { 
     outline: none;
-    border-bottom: 2px solid #007BFF;
+    border-bottom: 2px solid #21397a;
+    ;
 }
 
 /* 레이블 스타일 */
@@ -110,116 +83,133 @@ a{
 .form-group input:not(:placeholder-shown) ~ label {
     top: -20px;
     font-size: 12px;
-    color: #007BFF;
+    color: #21397a;
+}
+#bottom1 {
+  width: calc(100% - 30px); /* 100%에서 좌우 마진(15px * 2)을 제외한 너비 */
+  position: fixed; /* 화면 하단 고정 */
+  z-index: 200; /* 다른 요소 위에 표시 */
+  left: 0;
+  bottom: 0; /* 화면 하단에 위치 */
+  display: flex;
+  justify-content: center; /* 내부 콘텐츠 중앙 정렬 */
+  align-items: center; /* 내부 콘텐츠 수직 중앙 정렬 */
+  padding: 0; /* 내부 여백 제거 */
+  box-sizing: border-box; /* 패딩 포함 너비 계산 */
+  background-color: white;
+  margin: 0 15px; /* 좌우 마진 15px 추가 */
+  border-top-left-radius: 10px; /* 윗쪽 왼쪽 모서리 둥글게 */
+  border-top-right-radius: 10px; /* 윗쪽 오른쪽 모서리 둥글게 */
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
 }
 
- /* 버튼 스타일 */
+#bottom2 {
+  padding: 20px; /* 내부 여백 */
+  border-radius: 10px; /* 모서리 둥글게 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 박스 그림자 효과 */
+  width: 100%; /* 너비를 100%로 설정 */
+  max-width: 1200px; /* 세션 최대 너비 */
+  box-sizing: border-box; /* 패딩 포함 너비 계산 */
+  margin: 0 auto; /* 중앙 정렬 */
+}
+
 .button-group {
-    margin-top: 20px;
+  display: flex; /* Flexbox 활성화 */
+  justify-content: space-between; /* 버튼 간격 균등 분배 */
+  gap: 20px; /* 버튼 간 여백 설정 */
+  margin-top: 10px;
 }
 
-  .button-group button {
-    padding: 5px 10px;
-    margin: 0 5px;
-    font-size: clamp(5px 2vw); /* 글자크기를 최소 5px*/
-    overflow: hidden;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    transition: background-color 0.3s;
-    width: 18vw;
-    max-width: 200px;
-    height: 7vw;
-    max-height: 50px;
-  }
+.button-group button {
+  flex: 1; /* 버튼 크기를 동일하게 유지 */
+  padding: 10px; /* 여백 조정 */
+  margin: 0; /* 추가 마진 제거 */
+  font-size: 16px; /* 크기 고정 */
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  max-width: 200px; /* 최대 너비 설정 */
+  height: 50px; /* 고정 높이 설정 */
+}
 
-  .button-group button#generateReport {
-    background-color: #28a745;
-    color: #fff;
-    
-  }
+.button-group button#generateReport {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+  background-color: #21397a;
+  color: #fff;
+}
 
-  .button-group button#generateReport:hover {
-    background-color: #218838;
-  }
-
-  .button-group button#copyReport {
-    background-color: #17a2b8;
-    color: #fff;
-  }
-
-  .button-group button#copyReport:hover {
-    background-color: #138496;
-  }
-
-  .button-group button#clearFields {
-    background-color: #dc3545;
-    color: #fff;
-  }
-
-  .button-group button#clearFields:hover {
-    background-color: #c82333;
-  }
-  #muhakPercentageText{
-    font-size: 16px;
-    font-weight: 600;
-    padding-left: 10px;
-    padding-right: 10px;
-  }
-  #conversionText{
-    font-size: 16px;
-    font-weight: 600;
-  }
-
-  /* 보고서 출력 영역 스타일 */
-  #reportOutput {
-    background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    max-width: 800px;
-    margin: 0 auto;
-    white-space: pre-wrap;
-    margin-bottom: 300px;
-  }
+.button-group button#copyReport {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+  background-color: #21397a;
+  color: #fff;
+}
 
 
-  table{
-      overflow: hidden; /* 둥근 테두리 바깥 내용 숨기기 */
-      border:1px solid #999;       
-      text-align:center;
-      border-radius: 8px;
-      border-spacing: 0; /* 셀 간격 제거 */
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-      max-width: 800px;
-      margin-top: 20px;
-    }
-    table td{
-      border:1px solid #999;
-      
-    }
-    table input{
-    width: 100%; /* 입력칸 너비를 td와 동일하게 */
-    height: 100%; /* 입력칸 높이를 td와 동일하게 */
-    box-sizing: border-box; /* 테두리와 여백 포함 크기 조정 */
-    border: none; /* 입력칸 테두리 제거 */
-    padding: 0 5px; /* 입력칸 내부 여백 */
-    font-size: 14px; /* 폰트 크기 설정 */
-    text-align: center;
-    }
-    table input:focus {
-      outline: none; /* 포커스 시 외곽선 제거 */
-    
-    }
-    .border1 {
-      font-weight: 600;
-      background-color: #007BFF;
-      color:white;
-    }
+.bottom3 {
+  display: flex; /* Flexbox 활성화 */
+  justify-content: space-between; /* 좌우 간격 균등 분배 */
+  align-items: center; /* 세로 정렬 */
+  margin: 10px 0; /* 상하 여백 */
+  gap: 20px; /* 항목 간 간격 */
+}
+
+#muhakPercentageText,
+#conversionText {
+  font-size: 16px;
+  font-weight: 600;
+  flex: 1; /* 각 항목을 동일한 크기로 확장 */
+  text-align: center; /* 텍스트 가운데 정렬 */
+}
+
+
+
+/* 보고서 출력 영역 스타일 */
+
+#reportOutput {
+  background-color: #fff;
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+  max-width: 800px;
+  margin: 0 15px;
+  white-space: pre-wrap;
+  margin-bottom: 128px;
+}
+
+table{
+  overflow: hidden; /* 둥근 테두리 바깥 내용 숨기기 */
+  border:1px solid #999;       
+  text-align:center;
+  border-radius: 10px;
+  border-spacing: 0; /* 셀 간격 제거 */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  max-width: 800px;
+  margin-top: 20px;
+}
+table td{
+  border:1px solid #999; 
+}
+table input{
+  width: 100%; /* 입력칸 너비를 td와 동일하게 */
+  height: 100%; /* 입력칸 높이를 td와 동일하게 */
+  box-sizing: border-box; /* 테두리와 여백 포함 크기 조정 */
+  border: none; /* 입력칸 테두리 제거 */
+  padding: 0 5px; /* 입력칸 내부 여백 */
+  font-size: 14px; /* 폰트 크기 설정 */
+  text-align: center;
+}
+table input:focus {
+  outline: none; /* 포커스 시 외곽선 제거 */
+}
+
+.border1 {
+  font-weight: 600;
+  background-color: #21397a;
+  color:white;
+}
 
 .section {
-background-color: #fff;
-border: 1px solid #ddd;
 border-radius: 10px;
 overflow: hidden;
 box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
@@ -228,7 +218,7 @@ margin: 15px 15px;
 }
 
 .section-title {
-background-color: #007bff;
+background-color: #21397a;
 color: white;
 text-align: center;
 padding: 10px;
@@ -269,10 +259,9 @@ text-align: center;
   font-size: 0.8rem;
   padding: 8px;
 }
-}
+
 .item input[tpye="text"] {
 padding: 10px;
-
 font-size: 1rem;
 border: 1px solid #ccc;
 border-radius: 5px;
@@ -286,10 +275,9 @@ input[type=number]::-webkit-outer-spin-button {
 margin: 0;
 }
 
-/* Responsive design */
 @media (max-width: 600px) {
   .section-content {
-    grid-template-columns: repeat(2, 1fr); /* 두 개씩 나열 */
+    grid-template-columns: repeat(2, 1fr); 
   }
 
   .item {

@@ -225,11 +225,15 @@
 </div>
 
 
+  <!-- 보고서 출력 영역 -->
+  <div id="reportOutput"></div>
+  <br>
+
   <!-- 하단 기능 -->
   <div id="bottom1">
     <div id="bottom2">
       <!-- 비율 및 전환율 -->
-      <div>
+      <div class="bottom3">
         <span id="muhakPercentageText">무학 음용비: <span id="muhakPercentage">0%</span></span>
         <span id="conversionText">전환율: <span id="conversionRate">0%</span></span>
       </div>
@@ -238,13 +242,10 @@
       <div class="button-group">
         <button id="generateReport" onclick="generateReport()">보고서 생성</button>
         <button id="copyReport">복사하기</button>
-        <button id="clearFields">필드 초기화</button>
       </div>
     </div>
   </div>
 
-  <!-- 보고서 출력 영역 -->
-  <div id="reportOutput"></div>
 </body>
 
 </html>
