@@ -1,18 +1,20 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>회원가입 화면</title>
   <link rel="stylesheet" href="signup.css">
 </head>
+
 <body>
-  
+
   <div class="signup-container">
     <h1>회원가입</h1>
     <form id="signupForm">
       <input type="text" id="user_id" placeholder="아이디 (영어 + 숫자)" required>
-      <input type="password" id="password" placeholder="비밀번호 (영어 + 숫자 / 특수문자 가능)" required>  
+      <input type="password" id="password" placeholder="비밀번호 (영어 + 숫자 / 특수문자 가능)" required>
       <input type="text" id="name" placeholder="이름" required>
       <button type="submit">회원가입</button>
       <button class="login-button" onclick="window.location.href = 'login.html'; return false;">로그인 페이지</button>
@@ -21,27 +23,28 @@
 
   <script>
     document.getElementById('signupForm').addEventListener('submit', async (e) => {
-        e.preventDefault();
-        const user_id = document.getElementById('user_id').value;
-        const password = document.getElementById('password').value;
-        const name = document.getElementById('name').value;
+      e.preventDefault();
+      const user_id = document.getElementById('user_id').value;
+      const password = document.getElementById('password').value;
+      const name = document.getElementById('name').value;
 
-        const response = await fetch('/signup', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ user_id, password, name }),
-        });
+      const response = await fetch('/signup', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ user_id, password, name }),
+      });
 
-        if (response.ok) {
-            alert('회원가입 성공!');
-            window.location.href = '/login.html';  // 로그인 페이지로 이동
-        } else {
-            const error = await response.json();
-            alert(error.error);
-        }
+      if (response.ok) {
+        alert('회원가입 성공!');
+        window.location.href = '/login.html';  // 로그인 페이지로 이동
+      } else {
+        const error = await response.json();
+        alert(error.error);
+      }
     });
   </script>
 </body>
+
 </html>
 <!-- <!DOCTYPE html>
 <html lang="ko">

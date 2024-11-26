@@ -30,7 +30,7 @@ function inputUpdate() {
     const chamisulTables = parseInt(document.getElementById('chamisulTables').value || 0);
     const jinroTables = parseInt(document.getElementById('jinroTables').value || 0);
     const hitejinroOtherTables = parseInt(document.getElementById('hitejinroOtherTables').value || 0);
-    
+
     // 대선주조
     const daeseonC1Tables = parseInt(document.getElementById('daeseonC1Tables').value || 0);
     const daeseonOtherTables = parseInt(document.getElementById('daeseonOtherTables').value || 0);
@@ -39,17 +39,17 @@ function inputUpdate() {
     const saeroTables = parseInt(document.getElementById('saeroTables').value || 0);
     const cheonghaTables = parseInt(document.getElementById('cheonghaTables').value || 0);
     const lotteOtherTables = parseInt(document.getElementById('lotteOtherTables').value || 0);
-    
+
     // 기타
     const otherTables = parseInt(document.getElementById('otherTables').value || 0);
     const notDrinkTables = parseInt(document.getElementById('notDrinkTables').value || 0);
-    
+
     // 판촉물 사용량
     const hangoverCure = parseInt(document.getElementById('hangoverCure').value || 0);
     const tissue = parseInt(document.getElementById('tissue').value || 0);
     const jelly = parseInt(document.getElementById('jelly').value || 0);
     const coffeeCoupon = parseInt(document.getElementById('coffeeCoupon').value || 0);
-    
+
     // 음용 테이블 수 계산
     const drinkTables = gooddayTables + busangalmaeTables + maesilTables + whiteTables + talkseriesTables +
         muhakOtherTables + chamisulTables + jinroTables + hitejinroOtherTables +

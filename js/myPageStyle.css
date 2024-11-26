@@ -6,13 +6,15 @@
     --color: #4AD395;
     --gap: 8px;
     --radius: 5px;
-} 
-a{
+}
+
+a {
     color: black;
     text-decoration: none;
 }
+
 body {
-    flex-direction: column; 
+    flex-direction: column;
     margin: 32px;
     background-color: white;
     color: black;
@@ -22,6 +24,7 @@ body {
     height: 100vh;
     overflow: hidden;
 }
+
 .logoHeader {
     position: fixed;
     top: 0;
@@ -35,11 +38,11 @@ body {
     justify-content: space-between;
     padding: 0 20px;
     font-size: 20px;
-    z-index: 100;  
+    z-index: 100;
     font-weight: bold;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
 }
-  
+
 .logo {
     background-image: url('https://cdn-icons-png.flaticon.com/512/6333/6333367.png');
     background-size: 40px 40px;
@@ -52,54 +55,59 @@ body {
 }
 
 .dropdownBtn {
-      font-size: 14px;
-      background-color: white;
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
-      column-gap: var(--gap);
-      padding: 0.6rem;
-      cursor: pointer;
-      border-radius: var(--radius);
-      border: none;
-      box-shadow: var(--shadow);
-      position: fixed; 
-      top: 30px; 
-      right: 20px; 
-      z-index: 200;
+    font-size: 14px;
+    background-color: white;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    column-gap: var(--gap);
+    padding: 0.6rem;
+    cursor: pointer;
+    border-radius: var(--radius);
+    border: none;
+    box-shadow: var(--shadow);
+    position: fixed;
+    top: 30px;
+    right: 20px;
+    z-index: 200;
 }
+
 .bx {
     font-size: 18px;
 }
+
 .dropdown {
-      position: absolute; 
-      top: 80px; 
-      right: 20px;  
-      z-index: 200;
-      width: 250px;
-      box-shadow: var(--shadow);
-      border-radius: var(--radius);
-      margin-top: 0.3rem;
-      background: white;
-      visibility: hidden;
-      opacity: 0;
-      transform: translateY(0.5rem);
-      transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
-  
+    position: absolute;
+    top: 80px;
+    right: 20px;
+    z-index: 200;
+    width: 250px;
+    box-shadow: var(--shadow);
+    border-radius: var(--radius);
+    margin-top: 0.3rem;
+    background: white;
+    visibility: hidden;
+    opacity: 0;
+    transform: translateY(0.5rem);
+    transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+
 }
+
 .dropdown a {
-      display: flex;
-      align-items: center;
-      column-gap: var(--gap);
-      padding: 0.8rem 1rem;
-      text-decoration: none;
-      color: black;
+    display: flex;
+    align-items: center;
+    column-gap: var(--gap);
+    padding: 0.8rem 1rem;
+    text-decoration: none;
+    color: black;
 }
+
 .dropdown a:hover {
-      background-color: var(--color);
-      color: white;
+    background-color: var(--color);
+    color: white;
 }
-  .show {
+
+.show {
     visibility: visible;
     opacity: 1;
     transform: translateY(0rem);

@@ -2,4 +2,8 @@
     font-family: 'NEXON Lv1';
     src: url('./font.woff') format('woff');
 }
-* {font-family: "NEXON Lv1"; color: white;}
+
+* {
+    font-family: "NEXON Lv1";
+    color: white;
+}

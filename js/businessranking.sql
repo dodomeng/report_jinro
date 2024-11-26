@@ -86,12 +86,22 @@ INSERT INTO Businesses (name)
 VALUES
     ('경상대'),
     ('호탄동'),
-    ('과기대');
-    ('평거동');
-    ('상대동');
-    ('하대동A');
-    ('하대동B');
+    ('과기대'),
+    ('평거동'),
+    ('상대동'),
+    ('하대동A'),
+    ('하대동B'),
     ('혁신도시');
+
+INSERT INTO Businesses (business_id, name) VALUES (1, '경상대');
+INSERT INTO Businesses (business_id, name) VALUES (2, '호탄동');
+INSERT INTO Businesses (business_id, name) VALUES (3, '과기대');
+INSERT INTO Businesses (business_id, name) VALUES (4, '평거동');
+INSERT INTO Businesses (business_id, name) VALUES (5, '상대동');
+INSERT INTO Businesses (business_id, name) VALUES (6, '하대동A');
+INSERT INTO Businesses (business_id, name) VALUES (7, '하대동B');
+INSERT INTO Businesses (business_id, name) VALUES (8, '혁신도시');
+
 
 -- 예제 작업 기록 데이터 삽입
 INSERT INTO Work_Records (user_id, business_id, conversion_count, extra_count, record_date)
@@ -132,33 +142,3 @@ LIMIT 5;
 SELECT user_name, salary 
 FROM Salary_Calculation 
 WHERE salary >= 500000;
-
-SHOW columns from users;
-
--- 기존에 password_hash가 있었다면 이 컬럼을 수정하거나 삭제 후 새 컬럼을 추가합니다.
-ALTER TABLE Users ADD COLUMN password VARCHAR(255);
-
-ALTER TABLE Users ALTER COLUMN user_id SET DEFAULT 1;
-
-SHOW COLUMNS FROM Users;
-
-ALTER TABLE Users DROP COLUMN password_hash;
-
-ALTER TABLE Users MODIFY COLUMN user_id INT AUTO_INCREMENT;
-
--- 1. 외래 키 제약 제거
-ALTER TABLE work_records DROP FOREIGN KEY work_records_ibfk_2;
-ALTER TABLE user_workdays DROP FOREIGN KEY user_workdays_ibfk_1;
-
--- 2. Users 테이블에서 user_id 컬럼을 AUTO_INCREMENT로 변경
-ALTER TABLE Users MODIFY COLUMN user_id INT AUTO_INCREMENT;
-
--- 3. 외래 키 제약을 다시 추가
-ALTER TABLE work_records ADD CONSTRAINT work_records_ibfk_1 FOREIGN KEY (user_id) REFERENCES Users(user_id);
-
-SHOW CREATE TABLE work_records;
-
--- `name` 컬럼의 유니크 제약 조건 제거
-ALTER TABLE Users DROP INDEX name;
-
-select * from users;
