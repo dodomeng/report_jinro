@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="rankingPageStyle.css" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <title>Ranking Page</title>
+</head>
+
+<body>
+    <!-- 로고 영역 -->
+    <header class="logoHeader">
+        <div class="logo">
+            <a href="homePage.html">
+                좋은데이 상권 보고서
+            </a>
+        </div>
+    </header>
+
+    <!-- 드롭 다운 메뉴 영역 -->
+    <button class="dropdownBtn" id="dropdownBtn">
+        메뉴
+        <i class="bx bx-chevron-down" id="menuArrow"></i>
+    </button>
+    <div class="dropdown" id="dropdown">
+        <a href="#education">
+            <i class="bx bx-book"></i>
+            교육 자료
+        </a>
+        <a href="#records">
+            <i class="bx bx-folder"></i>
+            기록
+        </a>
+        <a href="myPage.html">
+            <i class="bx bx-user"></i>
+            내 정보
+        </a>
+        <a href="#settings">
+            <i class="bx bx-cog"></i>
+            설정
+        </a>
+    </div>
+
+    <div class="mainMenuRanking">
+        <img src="https://cdn-icons-png.flaticon.com/512/1603/1603847.png" alt="아이콘">
+        전환수 랭킹
+    </div>
+
+    <div id="welcomeMessage"></div>
+    <button onclick="logout()">로그아웃</button>
+
+    <!-- 랭킹 출력 -->
+    <div class="rankingPrint">
+        <ul id="rankingList">
+            <!-- 정보 출력 -->
+        </ul>
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const dropdownBtn = document.getElementById("dropdownBtn");
+            const dropdownMenu = document.getElementById("dropdown");
+            const toggleArrow = document.getElementById("menuArrow");
+            const rankingPrintElement = document.querySelector('.rankingPrint');
+            const welcomeMessageElement = document.querySelector('#welcomeMessage');
+
+            // 드롭다운 메뉴 토글
+            const toggleDropdown = function () {
+                dropdownMenu.classList.toggle("show");
+                toggleArrow.classList.toggle("arrow");
+            };
+
+            dropdownBtn.addEventListener("click", function (e) {
+                e.stopPropagation();
+                toggleDropdown();
+            });
+
+            document.documentElement.addEventListener("click", function () {
+                if (dropdownMenu.classList.contains("show")) {
+                    toggleDropdown();
+                }
+            });
+
+            // 로그인된 사용자 정보 확인
+            fetch('/api/user-info')
+                .then(response => response.json())
+                .then(user => {
+                    welcomeMessageElement.textContent = `${user.name}님, 환영합니다!`;
+                })
+                .catch(error => {
+                    console.error('사용자 정보 로드 중 오류:', error);
+                    welcomeMessageElement.textContent = '사용자 정보를 불러올 수 없습니다.';
+                });
+
+            // 랭킹 데이터 로드
+            fetch('/api/ranking')
+                .then(response => response.json())
+                .then(rankings => {
+                    if (rankings.length === 0) {
+                        rankingPrintElement.innerHTML = '<p>랭킹 데이터가 없습니다.</p>';
+                        return;
+                    }
+
+                    let rankingHTML = `
+                <table>
+                    <thead>
+                        <tr>
+                            <th>순위</th>
+                            <th>이름</th>
+                            <th>총 점수</th>
+                            <th>출근 일수</th>
+                            <th>월</th>
+                            <th>누적 전환수</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+            `;
+
+                    rankings.forEach((ranking, index) => {
+                        rankingHTML += `
+                    <tr>
+                        <td>${index + 1}</td>
+                        <td>${ranking.user_name}</td>
+                        <td>${ranking.total_score}</td>
+                        <td>${ranking.workdays_in_month}</td>
+                        <td>${Math.floor(ranking.month / 100)}-${ranking.month % 100}</td>
+                        <td>${ranking.total_conversions}</td>
+                    </tr>
+                `;
+                    });
+
+                    rankingHTML += `
+                    </tbody>
+                </table>
+            `;
+
+                    rankingPrintElement.innerHTML = rankingHTML;
+                })
+                .catch(error => {
+                    console.error('랭킹 데이터 로드 중 오류:', error);
+                    rankingPrintElement.innerHTML = '<p>랭킹 데이터를 불러올 수 없습니다.</p>';
+                });
+
+            // 로그아웃 버튼 이벤트
+            const logoutButton = document.querySelector('#logoutButton');
+            if (logoutButton) {
+                logoutButton.addEventListener('click', () => {
+                    localStorage.removeItem('user_id');
+                    window.location.href = '/login';
+                });
+            }
+        });
+
+    </script>
+</body>
+</html>

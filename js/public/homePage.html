@@ -6,9 +6,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="homePageStyle.css" rel="stylesheet" />
     <title>Home Page</title>
-</head>
+</head> 
 
 <body>
+    <script>
+        // 페이지 로드 시 로그인 정보 확인
+        window.onload = function() {
+            const isLoggedIn = localStorage.getItem('isLoggedIn');
+            const user_id = localStorage.getItem('user_id');
+
+            if (isLoggedIn === 'true' && user_id) {
+                document.getElementById('welcomeMessage').innerText = `${user_id}님, 환영합니다!`;
+            } else {
+                // 로그인 정보가 없으면 로그인 페이지로 리다이렉트
+                window.location.href = 'login.html';
+            }
+        };
+
+        // 로그아웃 함수
+        function logout() {
+            localStorage.removeItem('user_id');
+            localStorage.removeItem('isLoggedIn');
+            window.location.href = 'login.html';
+        }
+    </script>
+    
+    <div id="welcomeMessage"></div>
+    <button onclick="logout()">로그아웃</button>
 
     <div class="mainLogo">
         <img src="mainLogo.png" alt="아이콘">
@@ -24,11 +48,6 @@
             보고서 생성
         </a>
 
-        <a href="#myPage" class="mainMenuMyPage">
-            <img src="https://cdn-icons-png.flaticon.com/512/5198/5198222.png" alt="아이콘">
-            마이 페이지
-        </a>
-
         <a href="rankingPage.html" class="mainMenuRanking">
             <img src="https://cdn-icons-png.flaticon.com/512/1603/1603847.png" alt="아이콘">
             전환수 랭킹
@@ -37,16 +56,6 @@
         <a href="#baseLocation" class="mainMenuBaseLocation">
             <img src="https://cdn-icons-png.flaticon.com/512/3434/3434958.png" alt="아이콘">
             베이스 위치
-        </a>
-
-        <a href="#education" class="mainMenueEducation">
-            <img src="https://cdn-icons-png.flaticon.com/512/5000/5000270.png" alt="아이콘">
-            교육 자료
-        </a>
-
-        <a href="#Setting" class="mainMenueSetting">
-            <img src="https://cdn-icons-png.flaticon.com/512/3524/3524640.png" alt="아이콘">
-            설정
         </a>
     </div>
 </body>
