@@ -159,11 +159,11 @@ a {
 }
 
 @media (max-width: 768px) {
-    #rankingList li {
+    #rankingTable li {
         gap: 25px;
     }
 
-    #rankingList li {
+    #rankingTable li {
         font-size: 15px;
         padding: 20px;
     }

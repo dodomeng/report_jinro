@@ -1,59 +1,75 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const dropdownBtn = document.getElementById("dropdownBtn");
+    const dropdownMenu = document.getElementById("dropdown");
+    const toggleArrow = document.getElementById("menuArrow");
+    const rankingPrintElement = document.querySelector('.rankingPrint');
+    const welcomeMessageElement = document.querySelector('#welcomeMessage');
 
-document.addEventListener('DOMContentLoaded', function () {
-    const rankingData = [
-        { user: "사용자 A", conversionRate: 78 },
-        { user: "사용자 B", conversionRate: 65 },
-        { user: "사용자 C", conversionRate: 88 },
-        { user: "사용자 D", conversionRate: 55 },
-        { user: "사용자 E", conversionRate: 90 },
-        { user: "사용자 F", conversionRate: 72 },
-        { user: "사용자 G", conversionRate: 80 },
-        { user: "사용자 H", conversionRate: 68 },
-        { user: "사용자 I", conversionRate: 92 },
-        { user: "사용자 J", conversionRate: 84 }
-    ];
+    
+    // 드롭다운 메뉴 토글
+    const toggleDropdown = function () {
+        dropdownMenu.classList.toggle("show");
+        toggleArrow.classList.toggle("arrow");
+    };
 
-    rankingData.sort((a, b) => b.conversionRate - a.conversionRate);
-
-    const top5RankingData = rankingData.slice(0, 5);
-
-    const rankingList = document.getElementById('rankingList');
-
-    top5RankingData.forEach((data, index) => {
-        const listItem = document.createElement('li');
-        listItem.innerHTML = `
-            <span>순위: ${index + 1}</span>
-            <span>사용자: ${data.user}</span>
-            <span>전환율: ${data.conversionRate}%</span>
-        `;
-        rankingList.appendChild(listItem);
+    dropdownBtn.addEventListener("click", function (e) {
+        e.stopPropagation();
+        toggleDropdown();
     });
+
+    document.documentElement.addEventListener("click", function () {
+        if (dropdownMenu.classList.contains("show")) {
+            toggleDropdown();
+        }
+    });
+
+
+    // 로그인된 사용자 정보 확인
+    fetch('/api/user-info')
+        .then(response => response.json())
+        .then(user => {
+            welcomeMessageElement.textContent = `${user.name}님, 환영합니다!`;
+        })
+        .catch(error => {
+            console.error('사용자 정보 로드 중 오류:', error);
+            welcomeMessageElement.textContent = '사용자 정보를 불러올 수 없습니다.';
+        });
+
+
+    // 랭킹 데이터를 가져오고 테이블에 추가하는 코드
+    fetch('/api/ranking')
+        .then(response => response.json())
+        .then(rankings => {
+            const tableBody = document.querySelector('#rankingTable tbody');
+            tableBody.innerHTML = '';  // 기존 데이터를 비워서 새로 추가
+
+            rankings.forEach((ranking, index) => {
+                // 랭킹 데이터를 테이블에 추가
+                const row = document.createElement('tr');
+
+                row.innerHTML = `
+                    <td>${index + 1}</td>
+                    <td>${ranking.worker1_name || '미등록'}</td>
+                    <td>${ranking.total_score || 0}</td>
+                    <td>${ranking.workdays_in_month || 0}</td>
+                    <td>${ranking.month}</td>
+                    <td>${ranking.total_conversions || 0}</td>
+                    `;
+
+                tableBody.appendChild(row);
+            });
+        })
+        .catch(error => {
+            console.error('랭킹 데이터를 가져오는 중 오류:', error);
+        });
+
+
+    // 로그아웃 버튼 이벤트
+    const logoutButton = document.querySelector('#logoutButton');
+    if (logoutButton) {
+        logoutButton.addEventListener('click', () => {
+            localStorage.removeItem('user_id');
+            window.location.href = '/login';
+        });
+    }
 });
-
-
-// document.addEventListener('DOMContentLoaded', function () {
-//     // 서버에서 데이터를 가져옴
-//     fetch('/api/rankings')
-//         .then(response => {
-//             if (!response.ok) {
-//                 throw new Error('Network response was not ok');
-//             }
-//             return response.json(); // JSON 데이터를 파싱
-//         })
-//         .then(data => {
-//             // 랭킹 리스트 생성
-//             const rankingList = document.getElementById('rankingList');
-//             data.forEach((item, index) => {
-//                 const listItem = document.createElement('li');
-//                 listItem.innerHTML = `
-//                     <span>순위: ${index + 1}</span>
-//                     <span>사용자: ${item.user}</span>
-//                     <span>전환율: ${item.conversionRate}%</span>
-//                 `;
-//                 rankingList.appendChild(listItem);
-//             });
-//         })
-//         .catch(error => {
-//             console.error('There was a problem with the fetch operation:', error);
-//         });
-// });
