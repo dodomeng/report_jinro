@@ -10,7 +10,7 @@
   app.use(cors({
     origin: function (origin, callback) {
       // 추가적인 도메인도 허용하거나, development 환경에서만 허용할 수 있도록 설정
-      if (!origin || origin === 'http://localhost:8000') {
+      if (!origin || origin === 'http://localhost:8000' && 'https://node1.aa2.uk') {
         return callback(null, true);
       }
       return callback(new Error('Not allowed by CORS'));
