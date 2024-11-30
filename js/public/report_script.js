@@ -220,52 +220,51 @@
 
         // 보고서 포맷팅
         report = `< ${formattedDate} ${businessName || "상권명"} 상권보고 >
+1. 방문업소 : ${visitingEstablishments || 0}개
+2. 테이블수 : ${totalTables || 0}T (미음용 ${notDrinkTables || 0}T)
+3. 전환테이블
+가. 전환 T : ${totalConversion || 0}T 
+[${worker1Name} : ${worker1Conversion || 0}T, ${worker2Name} : ${worker2Conversion || 0}T]
+- 좋은데이 ( ${gooddayConversion || 0}T )
+- 화이트 ( ${whiteConversion || 0}T )
+- 부산갈매기 ( ${busangalmaeConversion || 0}T )
+- 매실마을 ( ${maesilConversion || 0}T )
+- 톡톡(석류/블루베리 등) ( ${talkseriesConversion || 0}T )
+- 추가 : ${totalAddition || 0}T
+[${worker1Name} : ${worker1Addition || 0}T, ${worker2Name} : ${worker2Addition || 0}T]
+4. 점유비
+가. 무학 : ${점유비["무학"].total || 0}T (${점유비["무학"].percentage || 0}%)
+- 좋은데이 : ${점유비["무학"].items["좋은데이"] || 0}T (${점유비["무학"].items["좋은데이_percentage"] || 0}%)
+- 화이트 : ${점유비["무학"].items["화이트"] || 0}T (${점유비["무학"].items["화이트_percentage"] || 0}%)
+- 부산갈매기 : ${점유비["무학"].items["부산갈매기"] || 0}T (${점유비["무학"].items["부산갈매기_percentage"] || 0}%)
+- 매실마을 : ${점유비["무학"].items["매실마을"] || 0}T (${점유비["무학"].items["매실마을_percentage"] || 0}%)
+- 톡시리즈 : ${점유비["무학"].items["톡시리즈"] || 0}T (${점유비["무학"].items["톡시리즈_percentage"] || 0}%)
+- 기타 : ${점유비["무학"].items["기타"] || 0}T (${점유비["무학"].items["기타_percentage"] || 0}%)
 
-            1. 방문업소 : ${visitingEstablishments || 0}개
-            2. 테이블수 : ${totalTables || 0}T (미음용 ${notDrinkTables || 0}T)
-            3. 전환테이블
-            가. 전환 T : ${totalConversion || 0}T 
-            [${worker1Name} : ${worker1Conversion || 0}T, ${worker2Name} : ${worker2Conversion || 0}T]
-            - 좋은데이 ( ${gooddayConversion || 0}T )
-            - 화이트 ( ${whiteConversion || 0}T )
-            - 부산갈매기 ( ${busangalmaeConversion || 0}T )
-            - 매실마을 ( ${maesilConversion || 0}T )
-            - 톡톡(석류/블루베리 등) ( ${talkseriesConversion || 0}T )
-            - 추가 : ${totalAddition || 0}T
-            [${worker1Name} : ${worker1Addition || 0}T, ${worker2Name} : ${worker2Addition || 0}T]
-            4. 점유비
-            가. 무학 : ${점유비["무학"].total || 0}T (${점유비["무학"].percentage || 0}%)
-            - 좋은데이 : ${점유비["무학"].items["좋은데이"] || 0}T (${점유비["무학"].items["좋은데이_percentage"] || 0}%)
-            - 화이트 : ${점유비["무학"].items["화이트"] || 0}T (${점유비["무학"].items["화이트_percentage"] || 0}%)
-            - 부산갈매기 : ${점유비["무학"].items["부산갈매기"] || 0}T (${점유비["무학"].items["부산갈매기_percentage"] || 0}%)
-            - 매실마을 : ${점유비["무학"].items["매실마을"] || 0}T (${점유비["무학"].items["매실마을_percentage"] || 0}%)
-            - 톡시리즈 : ${점유비["무학"].items["톡시리즈"] || 0}T (${점유비["무학"].items["톡시리즈_percentage"] || 0}%)
-            - 기타 : ${점유비["무학"].items["기타"] || 0}T (${점유비["무학"].items["기타_percentage"] || 0}%)
+나. 하이트진로 : ${점유비["하이트진로"].total || 0}T (${점유비["하이트진로"].percentage || 0}%)
+- 참이슬 : ${점유비["하이트진로"].items["참이슬"] || 0}T (${점유비["하이트진로"].items["참이슬_percentage"] || 0}%)
+- 진로 : ${점유비["하이트진로"].items["진로"] || 0}T (${점유비["하이트진로"].items["진로_percentage"] || 0}%)
+- 기타 : ${점유비["하이트진로"].items["기타"] || 0}T (${점유비["하이트진로"].items["기타_percentage"] || 0}%)
 
-            나. 하이트진로 : ${점유비["하이트진로"].total || 0}T (${점유비["하이트진로"].percentage || 0}%)
-            - 참이슬 : ${점유비["하이트진로"].items["참이슬"] || 0}T (${점유비["하이트진로"].items["참이슬_percentage"] || 0}%)
-            - 진로 : ${점유비["하이트진로"].items["진로"] || 0}T (${점유비["하이트진로"].items["진로_percentage"] || 0}%)
-            - 기타 : ${점유비["하이트진로"].items["기타"] || 0}T (${점유비["하이트진로"].items["기타_percentage"] || 0}%)
+다. 대선주조 : ${점유비["대선주조"].total || 0}T (${점유비["대선주조"].percentage || 0}%)
+- 대선(C1포함) : ${점유비["대선주조"].items["대선(C1포함)"] || 0}T (${점유비["대선주조"].items["대선(C1포함)_percentage"] || 0}%)
+- 기타 : ${점유비["대선주조"].items["기타"] || 0}T (${점유비["대선주조"].items["기타_percentage"] || 0}%)
 
-            다. 대선주조 : ${점유비["대선주조"].total || 0}T (${점유비["대선주조"].percentage || 0}%)
-            - 대선(C1포함) : ${점유비["대선주조"].items["대선(C1포함)"] || 0}T (${점유비["대선주조"].items["대선(C1포함)_percentage"] || 0}%)
-            - 기타 : ${점유비["대선주조"].items["기타"] || 0}T (${점유비["대선주조"].items["기타_percentage"] || 0}%)
+라. 롯데 : ${점유비["롯데"].total || 0}T (${점유비["롯데"].percentage || 0}%)
+- 새로 : ${점유비["롯데"].items["새로"] || 0}T (${점유비["롯데"].items["새로_percentage"] || 0}%)
+- 청하(별빛청하 포함) : ${점유비["롯데"].items["청하(별빛청하 포함)"] || 0}T (${점유비["롯데"].items["청하(별빛청하 포함)_percentage"] || 0}%)
+- 기타 : ${점유비["롯데"].items["기타"] || 0}T (${점유비["롯데"].items["기타_percentage"] || 0}%)
 
-            라. 롯데 : ${점유비["롯데"].total || 0}T (${점유비["롯데"].percentage || 0}%)
-            - 새로 : ${점유비["롯데"].items["새로"] || 0}T (${점유비["롯데"].items["새로_percentage"] || 0}%)
-            - 청하(별빛청하 포함) : ${점유비["롯데"].items["청하(별빛청하 포함)"] || 0}T (${점유비["롯데"].items["청하(별빛청하 포함)_percentage"] || 0}%)
-            - 기타 : ${점유비["롯데"].items["기타"] || 0}T (${점유비["롯데"].items["기타_percentage"] || 0}%)
+마. 기타 : ${점유비["기타"].total || 0}T (${점유비["기타"].percentage || 0}%)
 
-            마. 기타 : ${점유비["기타"].total || 0}T (${점유비["기타"].percentage || 0}%)
+5. 타사 판촉인원 / 판촉물 및 판촉 내용
+숙취해소제 : ${hangoverCure || 0}개 
+물티슈 : ${tissue || 0}개 
+젤리 : ${jelly || 0}개 
+커피쿠폰 : ${coffeeCoupon || 0}개 
 
-            5. 타사 판촉인원 / 판촉물 및 판촉 내용
-            숙취해소제 : ${hangoverCure || 0}개 
-            물티슈 : ${tissue || 0}개 
-            젤리 : ${jelly || 0}개 
-            커피쿠폰 : ${coffeeCoupon || 0}개 
-
-            6. 특이사항 
-            `;
+6. 특이사항 
+`;
     }
 
     // 보고서 출력
@@ -296,7 +295,7 @@
 
         console.log('보내는 데이터:', data);  // 보내는 데이터 로그
 
-        fetch('http://submit-report', {
+        fetch('/submit-report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
