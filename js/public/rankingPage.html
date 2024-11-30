@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,11 +8,12 @@
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <title>Ranking Page</title>
 </head>
+
 <body>
     <!-- 로고 영역 -->
-    <header class="logoHeader"> 
+    <header class="logoHeader">
         <div class="logo">
-            <a href="mainPage.html">
+            <a href="homePage.html">
                 좋은데이 상권 보고서
             </a>
         </div>
@@ -46,14 +48,27 @@
         전환수 랭킹
     </div>
 
+    <div id="welcomeMessage"></div>
+    <button id="logoutButton" onclick="logout()">로그아웃</button>
+
     <!-- 랭킹 출력 -->
     <div class="rankingPrint">
-        <ul id="rankingList">
-            <!-- 정보 출력 -->
-        </ul>
+        <table id="rankingTable">
+            <thead>
+                <tr>
+                    <th>순위</th>
+                    <th>이름</th>
+                    <th>총 점수</th>
+                    <th>출근 일수</th>
+                    <th>월</th>
+                    <th>누적 전환수</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- 랭킹 데이터가 여기로 들어옵니다. -->
+            </tbody>
+        </table>
     </div>
-
     <script src="rankingPageScript.js"></script>
-    <script src="mainPageScript.js"></script>
 </body>
 </html>

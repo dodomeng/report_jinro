@@ -9,21 +9,22 @@
 </head>
 
 <body>
-  <script src="./report_script.js"></script>
-
   <div class="mainLogo">
-    <img src="mainLogo.png" alt="아이콘">
+    <a href="homePage.html"><img src="mainLogo.png" alt="아이콘"></a>
   </div>
-
+  <div id="user-info"></div>
+  <div id="welcomeMessage"></div>
 
   <!-- 입력 폼 컨테이너 -->
   <div class="form-container">
     <!-- 상권명 입력 -->
     <div class="form-group">
-      <input type="text" id="businessArea" placeholder=" " required>
-      <label for="businessArea">상권명</label>
+      <label for="businessSelect">상권 선택:</label>
+      <select id="businessSelect" name="business_id">
+        <option value="">상권을 선택하세요</option>
+        <!-- JavaScript로 상권 목록을 동적으로 채울 것입니다 -->
+      </select>
     </div>
-
     <!-- 방문업소 입력 -->
     <div class="form-group">
       <input type="number" id="visitingEstablishments" value="30" placeholder=" " required>
@@ -51,13 +52,15 @@
         <!-- 근무자1 전환 -->
         <div class="item">
           <label for="worker1Conversion">근무자1 전환</label>
-          <input type="number" id="worker1Conversion" class="input-field" oninput="inputUpdate()" placeholder="테이블" required>
+          <input type="number" id="worker1Conversion" class="input-field" oninput="inputUpdate()" placeholder="테이블"
+            required>
         </div>
 
         <!-- 근무자2 전환 -->
         <div class="item">
           <label for="worker2Conversion">근무자2 전환</label>
-          <input type="number" id="worker2Conversion" class="input-field" oninput="inputUpdate()" placeholder="테이블" required>
+          <input type="number" id="worker2Conversion" class="input-field" oninput="inputUpdate()" placeholder="테이블"
+            required>
         </div>
 
         <!-- 근무자1 추가 -->
@@ -100,6 +103,7 @@
         <input type="number" id="talkseriesConversion" class="input-field" placeholder="테이블">
       </div>
     </div>
+  </div>
 
   <!-- 브랜드별 입력 섹션 -->
   <div class="container">
@@ -226,11 +230,15 @@
     </div>
   </div>
 
+  <!-- 보고서 출력 영역 -->
+  <div id="reportOutput"></div>
+  <br>
+
   <!-- 하단 기능 -->
   <div id="bottom1">
     <div id="bottom2">
       <!-- 비율 및 전환율 -->
-      <div>
+      <div class="bottom3">
         <span id="muhakPercentageText">무학 음용비: <span id="muhakPercentage">0%</span></span>
         <span id="conversionText">전환율: <span id="conversionRate">0%</span></span>
       </div>
@@ -239,13 +247,11 @@
       <div class="button-group">
         <button id="generateReport" onclick="generateReport()">보고서 생성</button>
         <button id="copyReport">복사하기</button>
-        <button id="clearFields">필드 초기화</button>
+        <button id="submit-button">업무 마감</button>
+        <div id="todayDate"></div>
       </div>
     </div>
   </div>
-
-  <!-- 보고서 출력 영역 -->
-  <div id="reportOutput"></div>
+  <script src="report_script.js"></script>
 </body>
-
 </html>
