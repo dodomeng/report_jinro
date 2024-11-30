@@ -296,7 +296,7 @@
 
         console.log('보내는 데이터:', data);  // 보내는 데이터 로그
 
-        fetch('http://localhost:8000/submit-report', {
+        fetch('http://submit-report', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
