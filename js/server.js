@@ -7,17 +7,6 @@
   const bodyParser = require('body-parser');
   const cors = require('cors');
 
-  app.use(cors({
-    origin: function (origin, callback) {
-      // 추가적인 도메인도 허용하거나, development 환경에서만 허용할 수 있도록 설정
-      if (!origin || origin === 'http://localhost:8000') {
-        return callback(null, true);
-      }
-      return callback(new Error('Not allowed by CORS'));
-    },
-    methods: ['GET', 'POST'],
-    credentials: true,
-  }));
 
   // JSON 데이터를 처리하기 위한 미들웨어
   app.use(express.json());
@@ -114,7 +103,7 @@
   // 회원가입 API (POST)
   app.post('/signup', (req, res) => {
     const { name, user_id, password } = req.body;  // name을 user_id로 변경
-
+    console.log(req.body)
     if (!user_id || !password) {
       console.log("qwqw");
       return res.status(400).json({ error: '아이디와 비밀번호를 입력하세요.' });
@@ -215,3 +204,15 @@
   var listener = app.listen(8000, function () {
     console.log(`서버가 ${listener.address().port} 포트에서 시작됩니다!\n링크: http://localhost:${listener.address().port}`); //Listening on port 8888
   });
+
+app.use(cors({
+origin: function (origin, callback) {
+  // 추가적인 도메인도 허용하거나, development 환경에서만 허용할 수 있도록 설정
+  if (!origin || origin === `http://localhost:${listener.address().port}` || 'https://node1.aa2.uk') {
+    return callback(null, true);
+  }
+  return callback(new Error('Not allowed by CORS'));
+},
+  methods: ['GET', 'POST'],
+  credentials: true,
+}));

@@ -6,8 +6,8 @@
 
 	-- (Users) 사용자 테이블 생성 (user_id를 사용자가 지정)
 	CREATE TABLE IF NOT EXISTS Users (
-		user_id INT NOT NULL PRIMARY KEY,  -- 사용자 ID는 사용자가 지정
-		name VARCHAR(255) UNIQUE NOT NULL,  -- 사용자 이름
+		user_id VARCHAR(255) UNIQUE NOT NULL PRIMARY KEY,  -- 사용자 ID는 사용자가 지정
+		name VARCHAR(255) NOT NULL,  -- 사용자 이름
 		password_hash VARCHAR(255) NOT NULL,  -- 비밀번호 해시값
 		created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,  -- 가입 일자
 		UNIQUE (user_id)  -- user_id는 중복되지 않도록 설정
