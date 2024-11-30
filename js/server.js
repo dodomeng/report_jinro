@@ -152,7 +152,7 @@
     }
 
     // user_id를 기준으로 DB에서 사용자 정보를 가져오는 예제
-    const query = 'SELECT name FROM users WHERE user_id = ?';
+    const query = 'SELECT name FROM Users WHERE user_id = ?';
     db.query(query, [req.session.user_id], (err, results) => {
       if (err) {
         console.error('사용자 정보 조회 중 오류:', err);
