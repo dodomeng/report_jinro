@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="education.js" rel="stylesheet" />
+    <link href="education.css" rel="stylesheet" />
+    <title>28개의 이미지 뷰어</title>
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Inter", sans-serif;
+    --shadow: rgba(0, 0, 0, 0.05) 0px 6px 10px 0px, rgba(0, 0, 0, 0.1) 0px 0px 0px 1px;
+    --color: #4AD395;
+    --gap: 8px;
+    --radius: 5px;
+    }
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .image-box {
+            width: 100%;
+            margin-bottom: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        .image-box img {
+            width: 100%;
+            display: block;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        /* 가져온것  */
+          
+    .arrow {
+        transform: rotate(180deg);
+        transition: 0.2s ease;
+    }
+
+    .logo-header {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100px;
+        background-color: #ffffff;
+        color: black;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 0 20px;
+        font-size: 20px;
+        z-index: 100;  
+        font-weight: bold;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+    }
+
+    .logo {
+        background-image: url('https://cdn-icons-png.flaticon.com/512/6333/6333367.png');
+        background-size: 40px 40px;
+        background-repeat: no-repeat;
+        background-position: 0px center;
+        padding-left: 50px;
+        position: relative;
+        z-index: 1;
+        display: flex;
+    }
+
+    .dropdownBtn {
+        font-size: 14px;
+        background-color: white;
+        display: flex;
+        align-items: center;
+        justify-content: flex-start;
+        column-gap: var(--gap);
+        padding: 0.6rem;
+        cursor: pointer;
+        border-radius: var(--radius);
+        border: none;
+        box-shadow: var(--shadow);
+        position: fixed; 
+        top: 30px; 
+        right: 20px; 
+        z-index: 200;
+    }
+    h1{
+       padding-top:125px;
+    }
+    .bx {
+    font-size: 18px;
+    }
+
+    .dropdown {
+        position: absolute; 
+        top: 80px; 
+        right: 20px;  
+        z-index: 200;
+        width: 250px;
+        box-shadow: var(--shadow);
+        border-radius: var(--radius);
+        margin-top: 0.3rem;
+        background: white;
+        visibility: hidden;
+        opacity: 0;
+        transform: translateY(0.5rem);
+        transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+
+    }
+    .dropdown a {
+        display: flex;
+        align-items: center;
+        column-gap: var(--gap);
+        padding: 0.8rem 1rem;
+        text-decoration: none;
+        color: black;
+    }
+    .dropdown a:hover {
+        background-color: var(--color);
+        color: white;
+    }
+    
+    .documentsCreate {
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 20px;
+        width: auto;  
+        margin-top: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+    }
+
+    .documentsCreate img {
+    width: 40px;
+    height: 40px;
+    margin-bottom: 10px; 
+    }
+
+    .baseRocation {
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 20px;
+        width: auto;  
+        margin-top: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+    }
+
+    .baseRocation img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px; 
+    }
+
+    .ranking {
+        color: black;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        font-weight: bold;
+        font-size: 18px;
+        padding: 20px;
+        width: auto;  
+        margin-top: 20px;
+        text-align: center;
+        border-radius: 5px;
+        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+    }
+
+    .ranking img {
+        width: 40px;
+        height: 40px;
+        margin-bottom: 10px; 
+    }
+
+    .show {
+        visibility: visible;
+        opacity: 1;
+        transform: translateY(0rem);
+    }
+    
+    .arrow {
+        transform: rotate(180deg);
+        transition: 0.2s ease;
+    }
+    </style>
+</head>
+<body>
+    <header class="logo-header"> 
+        <div class="logo">
+            좋은데이 상권 보고서
+        </div>
+    </header>
+    <!-- 드롭 다운 메뉴 코드 -->
+    <button class="dropdownBtn" id="dropdownBtn">
+        메뉴
+        <i class="bx bx-chevron-down" id="menuArrow"></i>
+    </button>
+    <div class="dropdown" id="dropdown">
+        <a href="#education">
+          <i class="bx bx-book"></i>
+          교육 자료
+        </a>
+        <a href="#records">
+          <i class="bx bx-folder"></i>
+          기록
+        </a>
+        <a href="#myInformation">
+          <i class="bx bx-user"></i>
+          내 정보
+        </a>
+        <a href="#settings">
+          <i class="bx bx-cog"></i>
+          설정
+        </a>
+    </div>
+    <h1> 교육자료 </h1>
+    <div class="container">
+        <!-- 이미지 박스 반복 -->
+        <div class="image-box">
+            <img src="part1_1.jpg" alt="Image 2">
+        </div>
+        <div class="image-box">
+            <img src="part1_2.jpg" alt="Image 3">
+        </div>
+        <div class="image-box">
+            <img src="part1_3.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_0.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_1.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_2.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_3.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_4.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_5.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_6.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_8.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part2_9.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3_1_0.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3_1_1.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3_1_2.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3_2.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3_3.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part3_3_1.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part4.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part5_1.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part5_2.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part5_3.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part5_4.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="part5_5.jpg" alt="Image 1">
+        </div>
+        <div class="image-box">
+            <img src="end.jpg" alt="Image 1">
+        </div>
+    </div>
+</body>
+</html>
