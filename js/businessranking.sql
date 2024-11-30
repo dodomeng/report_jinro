@@ -59,19 +59,23 @@
 	-- 뷰 생성
 	CREATE OR REPLACE VIEW Ranking_View AS
 	SELECT 
-		COALESCE(u1.name, w.worker1_name) AS worker1_name,  -- worker1_name이 Users 테이블과 일치하면 그 값을 사용, 아니면 클라이언트 값 그대로
-		COALESCE(u2.name, w.worker2_name) AS worker2_name,  -- worker2_name이 Users 테이블과 일치하면 그 값을 사용, 아니면 클라이언트 값 그대로
-		SUM(w.worker1_conversion + w.worker2_conversion) AS total_score,  -- worker1, worker2의 전환수 합산
-		COALESCE(ANY_VALUE(uw.workdays), 0) AS workdays_in_month,  -- 월별 출근 일수, 없으면 0으로 설정
-		YEAR(w.record_date) * 100 + MONTH(w.record_date) AS month,  -- 월 계산
-		SUM(w.worker1_conversion) + SUM(w.worker2_conversion) AS total_conversions,  -- 누적 전환수
-		MAX(w.record_date) AS latest_record_date  -- 가장 최신 기록 날짜
+		COALESCE(ANY_VALUE(u1.name), w.worker1_name) AS worker1_name,
+		COALESCE(ANY_VALUE(u2.name), w.worker2_name) AS worker2_name,
+		SUM(w.worker1_conversion + w.worker2_conversion) AS total_score,
+		COALESCE(ANY_VALUE(uw.workdays), 0) AS workdays_in_month,
+		YEAR(w.record_date) * 100 + MONTH(w.record_date) AS month,
+		SUM(w.worker1_conversion) + SUM(w.worker2_conversion) AS total_conversions,
+		MAX(w.record_date) AS latest_record_date
 	FROM Work_Records w
-	LEFT JOIN Users u1 ON w.worker1_name = u1.name  -- worker1_name과 Users 테이블의 name을 비교하여 일치하는 user 찾기
-	LEFT JOIN Users u2 ON w.worker2_name = u2.name  -- worker2_name과 Users 테이블의 name을 비교하여 일치하는 user 찾기
-	LEFT JOIN User_Workdays uw ON w.user_id = uw.user_id AND YEAR(w.record_date) * 100 + MONTH(w.record_date) = uw.month  -- 출근 일수 포함
-	GROUP BY YEAR(w.record_date), MONTH(w.record_date), w.worker1_name, w.worker2_name
-	ORDER BY total_score DESC;
+	LEFT JOIN Users u1 ON w.worker1_name = u1.name
+	LEFT JOIN Users u2 ON w.worker2_name = u2.name
+	LEFT JOIN User_Workdays uw ON w.user_id = uw.user_id AND YEAR(w.record_date) * 100 + MONTH(w.record_date) = uw.month
+	GROUP BY 
+		YEAR(w.record_date), 
+		MONTH(w.record_date), 
+		w.worker1_name, 
+		w.worker2_name;
+
 
 
 
