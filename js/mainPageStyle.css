@@ -8,13 +8,13 @@
   --radius: 5px;
 }
 
-a{
+a {
   color: black;
   text-decoration: none;
 }
 
 body {
-  flex-direction: column; 
+  flex-direction: column;
   margin: 32px;
   background-color: white;
   color: black;
@@ -38,7 +38,7 @@ body {
   justify-content: space-between;
   padding: 0 20px;
   font-size: 20px;
-  z-index: 100;  
+  z-index: 100;
   font-weight: bold;
   box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
 }
@@ -55,53 +55,56 @@ body {
 }
 
 .dropdownBtn {
-    font-size: 14px;
-    background-color: white;
-    display: flex;
-    align-items: center;
-    justify-content: flex-start;
-    column-gap: var(--gap);
-    padding: 0.6rem;
-    cursor: pointer;
-    border-radius: var(--radius);
-    border: none;
-    box-shadow: var(--shadow);
-    position: fixed; 
-    top: 30px; 
-    right: 20px; 
-    z-index: 200;
+  font-size: 14px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  column-gap: var(--gap);
+  padding: 0.6rem;
+  cursor: pointer;
+  border-radius: var(--radius);
+  border: none;
+  box-shadow: var(--shadow);
+  position: fixed;
+  top: 30px;
+  right: 20px;
+  z-index: 200;
 }
+
 .bx {
   font-size: 18px;
 }
 
 .dropdown {
-    position: absolute; 
-    top: 80px; 
-    right: 20px;  
-    z-index: 200;
-    width: 250px;
-    box-shadow: var(--shadow);
-    border-radius: var(--radius);
-    margin-top: 0.3rem;
-    background: white;
-    visibility: hidden;
-    opacity: 0;
-    transform: translateY(0.5rem);
-    transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
+  position: absolute;
+  top: 80px;
+  right: 20px;
+  z-index: 200;
+  width: 250px;
+  box-shadow: var(--shadow);
+  border-radius: var(--radius);
+  margin-top: 0.3rem;
+  background: white;
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(0.5rem);
+  transition: all 0.1s cubic-bezier(0.16, 1, 0.5, 1);
 
 }
+
 .dropdown a {
-    display: flex;
-    align-items: center;
-    column-gap: var(--gap);
-    padding: 0.8rem 1rem;
-    text-decoration: none;
-    color: black;
+  display: flex;
+  align-items: center;
+  column-gap: var(--gap);
+  padding: 0.8rem 1rem;
+  text-decoration: none;
+  color: black;
 }
+
 .dropdown a:hover {
-    background-color: var(--color);
-    color: white;
+  background-color: var(--color);
+  color: white;
 }
 
 .mainMenuRanking {
@@ -113,7 +116,7 @@ body {
   font-weight: bold;
   font-size: 18px;
   padding: 20px;
-  width: auto;  
+  width: auto;
   margin-top: 20px;
   text-align: center;
   border-radius: 5px;
@@ -123,29 +126,29 @@ body {
 .mainMenuRanking img {
   width: 40px;
   height: 40px;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .mainMenuGenerateReport {
-    color: black;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    font-weight: bold;
-    font-size: 18px;
-    padding: 20px;
-    width: auto;  
-    margin-top: 20px;
-    text-align: center;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+  color: black;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 18px;
+  padding: 20px;
+  width: auto;
+  margin-top: 20px;
+  text-align: center;
+  border-radius: 5px;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
 }
 
 .mainMenuGenerateReport img {
-    width: 40px;
-    height: 40px;
-    margin-bottom: 10px; 
+  width: 40px;
+  height: 40px;
+  margin-bottom: 10px;
 }
 
 .mainMenuBaseLocation {
@@ -157,7 +160,7 @@ body {
   font-weight: bold;
   font-size: 18px;
   padding: 20px;
-  width: auto;  
+  width: auto;
   margin-top: 20px;
   text-align: center;
   border-radius: 5px;
@@ -167,16 +170,16 @@ body {
 .mainMenuBaseLocation img {
   width: 40px;
   height: 40px;
-  margin-bottom: 10px; 
+  margin-bottom: 10px;
 }
 
 .show {
-    visibility: visible;
-    opacity: 1;
-    transform: translateY(0rem);
+  visibility: visible;
+  opacity: 1;
+  transform: translateY(0rem);
 }
 
 .arrow {
-    transform: rotate(180deg);
-    transition: 0.2s ease;
+  transform: rotate(180deg);
+  transition: 0.2s ease;
 }

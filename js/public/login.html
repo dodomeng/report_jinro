@@ -1,15 +1,17 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>로그인</title>
   <link rel="stylesheet" href="login.css">
 </head>
+
 <body>
   <div class="login-container">
     <img src="테스트4.png" alt="로그인 이미지">
-    <h1>좋은데이 진주팀</h1>
+    <h1>좋은데이 진주지점 ABT</h1>
     <form id="loginForm">
       <input type="text" id="user_id" placeholder="아이디" required> <!-- id 수정 -->
       <input type="password" id="password" placeholder="비밀번호" required>
@@ -18,49 +20,7 @@
     </form>
   </div>
 
-  <script>
-    // 로그인 처리
-    const handleLogin = () => {
-      const user_id = document.getElementById('user_id').value.trim(); // user_id로 수정
-      const password = document.getElementById('password').value.trim();
-
-      if (!user_id || !password) {
-        alert("아이디와 비밀번호를 입력해주세요.");
-        return;
-      }
-
-      fetch('/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ user_id, password }), // user_id 전송
-      })
-        .then(response => {
-          if (!response.ok) {
-            throw new Error('로그인 요청 실패: ' + response.status);
-          }
-          return response.json();
-        })
-        .then(data => {
-          if (data.error) {
-            alert(data.error);
-          } else {
-            alert(data.message);
-            window.location.href = '/home.html'; // 로그인 성공 시 이동할 페이지
-          }
-        })
-        .catch(error => {
-          console.error('로그인 요청 오류:', error);
-          alert('로그인 중 문제가 발생했습니다. 다시 시도해주세요.');
-        });
-    };
-
-    // 로그인 버튼 클릭 이벤트 연결
-    document.getElementById('loginButton').addEventListener('click', handleLogin);
-
-    // 회원가입 버튼 클릭 시 signup.html로 이동
-    document.querySelector('.signup-button').addEventListener('click', () => {
-      window.location.href = 'signup.html';
-    });
-  </script>
+  <script src = "loginScript.js"></script>
 </body>
+
 </html>

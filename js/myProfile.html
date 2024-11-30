@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Dashboard</title>
+  <link rel="stylesheet" href="myProfile.css">
+</head>
+<body>
+    <header class="logo-header"> 
+        <div class="logo">
+            좋은데이 상권 보고서
+        </div>
+    </header>
+    <!-- 드롭 다운 메뉴 코드 -->
+    <button class="dropdownBtn" id="dropdownBtn">
+        메뉴
+        <i class="bx bx-chevron-down" id="menuArrow"></i>
+    </button>
+    <div class="dropdown" id="dropdown">
+        <a href="#education">
+          <i class="bx bx-book"></i>
+          교육 자료
+        </a>
+        <a href="#records">
+          <i class="bx bx-folder"></i>
+          기록
+        </a>
+        <a href="#myInformation">
+          <i class="bx bx-user"></i>
+          내 정보
+        </a>
+        <a href="#settings">
+          <i class="bx bx-cog"></i>
+          설정
+        </a>
+        <style>
+         
+        </style>
+    </div>
+    <div class="profile-container">
+      <div class="profile-image">
+        <img src="https://via.placeholder.com/80" alt="프로필 사진">
+      </div>
+      <div class="profile-info">
+        <h1>이름 홍길동 </h1>
+        <p>출근일수 | 00일</p>
+        <p>비밀번호 | ********</p>
+        <div class="password-change">
+          <button>비밀번호 변경</button>
+        </div>
+      </div>
+    </div>
+    
+    <body>
+      <div class="container">
+        <div class="buttons">
+          <button onclick="showReport(1)"> 최근 보고서 1</button>
+          <button onclick="showReport(2)"> 최근 보고서 2</button>
+          <button onclick="showReport(3)"> 최근 보고서 3</button>
+        </div>
+    
+        <div id="report-1" class="report-content">
+          <h3>최근 보고서 1 </h3>
+          <p>보고서 1에 대한 내용이 여기에 표시됩니다.</p>
+        </div>
+        <div id="report-2" class="report-content">
+          <h3>최근 보고서 2 </h3>
+          <p>보고서 2에 대한 내용이 여기에 표시됩니다.</p>
+        </div>
+        <div id="report-3" class="report-content">
+          <h3>최근 보고서 3 </h3>
+          <p>보고서 3에 대한 내용이 여기에 표시됩니다.</p>
+        </div>
+      </div>
+</body>
+<script src="myProfile.js">
+  </script>
+</html>
