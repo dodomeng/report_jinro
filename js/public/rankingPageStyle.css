@@ -150,6 +150,7 @@ a {
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
     width: 200px;
     margin-top: 20px;
+    background-color: white; 
 }
 
 .mainMenuRanking img {
@@ -179,6 +180,68 @@ a {
     }
 }
 
+.rankingPrint {
+    display: flex;
+    justify-content: center; /* 가로 중앙 정렬 */
+    align-items: center; /* 세로 중앙 정렬 */
+    min-height: 100vh; /* 화면 전체 높이 사용 */
+    padding: 20px;
+    box-sizing: border-box; /* 패딩 포함 */
+    
+}
+#rankingTable {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      max-width: 700px;
+    }
+
+    #rankingTable th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      
+    }
+
+    #rankingTable th  {
+      background-color: #21397a;
+      color: white;
+      font-size: 0.4em;
+      
+    }
+    #rankingTable tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    #rankingTable td {
+      font-size: 0.4em;
+    }
+
+    #rankingTable .rank {
+      font-weight: bold;
+      color: #21397a;
+    }
+    .th1{
+      width:10%;
+    }
+    .th2{
+       width:19%;
+    }
+    .th3{
+        width:17.5%;
+    }
+    .th4{
+        width:16.5%;
+    }
+    .th5{
+        width:17.5%;
+    }
+    .th6{
+        width:16.5%;
+    }
 
 /* <style>
         * {
