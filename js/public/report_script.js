@@ -1,16 +1,17 @@
     // 페이지 로드 시 로그인 정보 확인
     window.onload = function () {
         const userInfoElement = document.getElementById('user-info');
-        const isLoggedIn = localStorage.getItem('isLoggedIn');
-        const user_id = localStorage.getItem('user_id');
+        const isLoggedIn = localStorage.getItem('isLoggedIn'); // 로컬 스토리지에서 로그인 상태 확인
+        const user_id = localStorage.getItem('user_id'); // 로컬 스토리지에서 사용자 ID 확인
 
+        // 1. 사용자가 로그인한 상태인지 확인
         if (isLoggedIn === 'true' && user_id) {
-            // 로그인한 사용자 이름을 받아와서 환영 메시지에 포함
+            // 로그인 상태일 경우 사용자 정보를 서버에서 가져오기
             fetch('/api/user-info')
-                .then(response => response.json())
+                .then(response => response.json()) // 응답을 JSON 형식으로 파싱
                 .then(data => {
-                    const userName = data.name;  // 사용자 이름
-                    document.getElementById('welcomeMessage').innerText = `${userName}님, 환영합니다!`;
+                    const userName = data.name;  // 서버에서 전달받은 사용자 이름
+                    document.getElementById('welcomeMessage').innerText = `ㅤ${userName}님, 환영합니다!`;
                 })
                 .catch(error => {
                     console.error('사용자 정보 로드 중 오류:', error);
@@ -20,10 +21,7 @@
             window.location.href = 'login.html';
         }
 
-        //   // 페이지가 로드되면 랭킹 데이터를 자동으로 불러옵니다.
-        //   loadRanking();
-
-        // 페이지 로드 시 날짜 설정
+        // 2. 페이지 로드 시 날짜 설정 함수 호출
         setTodayDate();
     };
 
@@ -220,51 +218,52 @@
 
         // 보고서 포맷팅
         report = `< ${formattedDate} ${businessName || "상권명"} 상권보고 >
-1. 방문업소 : ${visitingEstablishments || 0}개
-2. 테이블수 : ${totalTables || 0}T (미음용 ${notDrinkTables || 0}T)
-3. 전환테이블
-가. 전환 T : ${totalConversion || 0}T 
-[${worker1Name} : ${worker1Conversion || 0}T, ${worker2Name} : ${worker2Conversion || 0}T]
-- 좋은데이 ( ${gooddayConversion || 0}T )
-- 화이트 ( ${whiteConversion || 0}T )
-- 부산갈매기 ( ${busangalmaeConversion || 0}T )
-- 매실마을 ( ${maesilConversion || 0}T )
-- 톡톡(석류/블루베리 등) ( ${talkseriesConversion || 0}T )
-- 추가 : ${totalAddition || 0}T
-[${worker1Name} : ${worker1Addition || 0}T, ${worker2Name} : ${worker2Addition || 0}T]
-4. 점유비
-가. 무학 : ${점유비["무학"].total || 0}T (${점유비["무학"].percentage || 0}%)
-- 좋은데이 : ${점유비["무학"].items["좋은데이"] || 0}T (${점유비["무학"].items["좋은데이_percentage"] || 0}%)
-- 화이트 : ${점유비["무학"].items["화이트"] || 0}T (${점유비["무학"].items["화이트_percentage"] || 0}%)
-- 부산갈매기 : ${점유비["무학"].items["부산갈매기"] || 0}T (${점유비["무학"].items["부산갈매기_percentage"] || 0}%)
-- 매실마을 : ${점유비["무학"].items["매실마을"] || 0}T (${점유비["무학"].items["매실마을_percentage"] || 0}%)
-- 톡시리즈 : ${점유비["무학"].items["톡시리즈"] || 0}T (${점유비["무학"].items["톡시리즈_percentage"] || 0}%)
-- 기타 : ${점유비["무학"].items["기타"] || 0}T (${점유비["무학"].items["기타_percentage"] || 0}%)
 
-나. 하이트진로 : ${점유비["하이트진로"].total || 0}T (${점유비["하이트진로"].percentage || 0}%)
-- 참이슬 : ${점유비["하이트진로"].items["참이슬"] || 0}T (${점유비["하이트진로"].items["참이슬_percentage"] || 0}%)
-- 진로 : ${점유비["하이트진로"].items["진로"] || 0}T (${점유비["하이트진로"].items["진로_percentage"] || 0}%)
-- 기타 : ${점유비["하이트진로"].items["기타"] || 0}T (${점유비["하이트진로"].items["기타_percentage"] || 0}%)
+            1. 방문업소 : ${visitingEstablishments || 0}개
+            2. 테이블수 : ${totalTables || 0}T (미음용 ${notDrinkTables || 0}T)
+            3. 전환테이블
+            가. 전환 T : ${totalConversion || 0}T 
+            [${worker1Name} : ${worker1Conversion || 0}T, ${worker2Name} : ${worker2Conversion || 0}T]
+            - 좋은데이 ( ${gooddayConversion || 0}T )
+            - 화이트 ( ${whiteConversion || 0}T )
+            - 부산갈매기 ( ${busangalmaeConversion || 0}T )
+            - 매실마을 ( ${maesilConversion || 0}T )
+            - 톡톡(석류/블루베리 등) ( ${talkseriesConversion || 0}T )
+            - 추가 : ${totalAddition || 0}T
+            [${worker1Name} : ${worker1Addition || 0}T, ${worker2Name} : ${worker2Addition || 0}T]
+            4. 점유비
+            가. 무학 : ${점유비["무학"].total || 0}T (${점유비["무학"].percentage || 0}%)
+            - 좋은데이 : ${점유비["무학"].items["좋은데이"] || 0}T (${점유비["무학"].items["좋은데이_percentage"] || 0}%)
+            - 화이트 : ${점유비["무학"].items["화이트"] || 0}T (${점유비["무학"].items["화이트_percentage"] || 0}%)
+            - 부산갈매기 : ${점유비["무학"].items["부산갈매기"] || 0}T (${점유비["무학"].items["부산갈매기_percentage"] || 0}%)
+            - 매실마을 : ${점유비["무학"].items["매실마을"] || 0}T (${점유비["무학"].items["매실마을_percentage"] || 0}%)
+            - 톡시리즈 : ${점유비["무학"].items["톡시리즈"] || 0}T (${점유비["무학"].items["톡시리즈_percentage"] || 0}%)
+            - 기타 : ${점유비["무학"].items["기타"] || 0}T (${점유비["무학"].items["기타_percentage"] || 0}%)
 
-다. 대선주조 : ${점유비["대선주조"].total || 0}T (${점유비["대선주조"].percentage || 0}%)
-- 대선(C1포함) : ${점유비["대선주조"].items["대선(C1포함)"] || 0}T (${점유비["대선주조"].items["대선(C1포함)_percentage"] || 0}%)
-- 기타 : ${점유비["대선주조"].items["기타"] || 0}T (${점유비["대선주조"].items["기타_percentage"] || 0}%)
+            나. 하이트진로 : ${점유비["하이트진로"].total || 0}T (${점유비["하이트진로"].percentage || 0}%)
+            - 참이슬 : ${점유비["하이트진로"].items["참이슬"] || 0}T (${점유비["하이트진로"].items["참이슬_percentage"] || 0}%)
+            - 진로 : ${점유비["하이트진로"].items["진로"] || 0}T (${점유비["하이트진로"].items["진로_percentage"] || 0}%)
+            - 기타 : ${점유비["하이트진로"].items["기타"] || 0}T (${점유비["하이트진로"].items["기타_percentage"] || 0}%)
 
-라. 롯데 : ${점유비["롯데"].total || 0}T (${점유비["롯데"].percentage || 0}%)
-- 새로 : ${점유비["롯데"].items["새로"] || 0}T (${점유비["롯데"].items["새로_percentage"] || 0}%)
-- 청하(별빛청하 포함) : ${점유비["롯데"].items["청하(별빛청하 포함)"] || 0}T (${점유비["롯데"].items["청하(별빛청하 포함)_percentage"] || 0}%)
-- 기타 : ${점유비["롯데"].items["기타"] || 0}T (${점유비["롯데"].items["기타_percentage"] || 0}%)
+            다. 대선주조 : ${점유비["대선주조"].total || 0}T (${점유비["대선주조"].percentage || 0}%)
+            - 대선(C1포함) : ${점유비["대선주조"].items["대선(C1포함)"] || 0}T (${점유비["대선주조"].items["대선(C1포함)_percentage"] || 0}%)
+            - 기타 : ${점유비["대선주조"].items["기타"] || 0}T (${점유비["대선주조"].items["기타_percentage"] || 0}%)
 
-마. 기타 : ${점유비["기타"].total || 0}T (${점유비["기타"].percentage || 0}%)
+            라. 롯데 : ${점유비["롯데"].total || 0}T (${점유비["롯데"].percentage || 0}%)
+            - 새로 : ${점유비["롯데"].items["새로"] || 0}T (${점유비["롯데"].items["새로_percentage"] || 0}%)
+            - 청하(별빛청하 포함) : ${점유비["롯데"].items["청하(별빛청하 포함)"] || 0}T (${점유비["롯데"].items["청하(별빛청하 포함)_percentage"] || 0}%)
+            - 기타 : ${점유비["롯데"].items["기타"] || 0}T (${점유비["롯데"].items["기타_percentage"] || 0}%)
 
-5. 타사 판촉인원 / 판촉물 및 판촉 내용
-숙취해소제 : ${hangoverCure || 0}개 
-물티슈 : ${tissue || 0}개 
-젤리 : ${jelly || 0}개 
-커피쿠폰 : ${coffeeCoupon || 0}개 
+            마. 기타 : ${점유비["기타"].total || 0}T (${점유비["기타"].percentage || 0}%)
 
-6. 특이사항 
-`;
+            5. 타사 판촉인원 / 판촉물 및 판촉 내용
+            숙취해소제 : ${hangoverCure || 0}개 
+            물티슈 : ${tissue || 0}개 
+            젤리 : ${jelly || 0}개 
+            커피쿠폰 : ${coffeeCoupon || 0}개 
+
+            6. 특이사항 
+            `;
     }
 
     // 보고서 출력
@@ -292,17 +291,17 @@
 
     // 서버로 데이터 전송하는 함수
     function sendDataToServer(data) {
+        console.log('보내는 데이터:', data);  // 디버깅용 로그
 
-        console.log('보내는 데이터:', data);  // 보내는 데이터 로그
-
-        fetch('/submit-report', {
-            method: 'POST',
+        // 서버로 POST 요청을 보내는 fetch 함수
+        fetch('http://localhost:8000/submit-report', { // API 엔드포인트 URL
+            method: 'POST', // HTTP 요청 메서드로 POST를 사용 (데이터 전송)
             headers: {
-                'Content-Type': 'application/json',
+                'Content-Type': 'application/json', // 전송 데이터 형식을 JSON으로 지정
             },
-            body: JSON.stringify(data),  // 전송할 데이터는 객체로 만들어서 JSON으로 변환
+            body: JSON.stringify(data), // 전송할 데이터를 JSON 문자열로 변환하여 요청 본문(body)에 포함
         })
-            .then(response => response.json())
+            .then(response => response.json()) // 서버의 응답을 JSON 형식으로 변환
             .then(data => {
                 console.log('데이터 전송 성공:', data);
                 alert('데이터가 서버에 저장되었습니다.');
@@ -318,19 +317,19 @@
     // '업무 마감' 버튼 클릭 시 실행될 함수
     document.getElementById('submit-button').addEventListener('click', function () {
         // 입력된 값 가져오기
-        const selectedBusinessId = businessSelect.value; // 상권 id
-        const worker1Name = document.getElementById('worker1Name').value;
-        const worker2Name = document.getElementById('worker2Name').value;
-        const worker1Conversion = document.getElementById('worker1Conversion').value;
-        const worker2Conversion = document.getElementById('worker2Conversion').value;
+        const selectedBusinessId = businessSelect.value; // 상권 ID
+        const worker1Name = document.getElementById('worker1Name').value; // 작업자1 Name
+        const worker2Name = document.getElementById('worker2Name').value; // 작업자2 Name
+        const worker1Conversion = document.getElementById('worker1Conversion').value; // 작업자1 전환 수
+        const worker2Conversion = document.getElementById('worker2Conversion').value; // 작업자2 전환 수
 
-        // 서버로 전송할 데이터
+        // 서버로 전송할 데이터 구성
         const dataToSend = {
             business_id: selectedBusinessId, // 상권 ID 전송
-            worker1Name: worker1Name,
-            worker2Name: worker2Name,
-            worker1Conversion: worker1Conversion,
-            worker2Conversion: worker2Conversion
+            worker1Name: worker1Name, // 작업자1 Name
+            worker2Name: worker2Name, // 작업자2 Name
+            worker1Conversion: worker1Conversion, // 작업자1 전환 수
+            worker2Conversion: worker2Conversion // 작업자2 전환 수
         };
 
         // 데이터를 전송하는 함수 호출

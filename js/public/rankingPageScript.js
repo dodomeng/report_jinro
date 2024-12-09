@@ -38,30 +38,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // 랭킹 데이터를 가져오고 테이블에 추가하는 코드
     fetch('/api/ranking')
-        .then(response => response.json())
-        .then(rankings => {
-            const tableBody = document.querySelector('#rankingTable tbody');
-            tableBody.innerHTML = '';  // 기존 데이터를 비워서 새로 추가
+    .then(response => response.json())
+    .then(rankings => {
+        const tableBody = document.querySelector('#rankingTable tbody');
+        tableBody.innerHTML = '';  // 기존 데이터를 비워서 새로 추가
 
-            rankings.forEach((ranking, index) => {
-                // 랭킹 데이터를 테이블에 추가
-                const row = document.createElement('tr');
+        // 중복된 작업자를 합산하기 위한 객체
+        const workers = {};
 
-                row.innerHTML = `
-                    <td>${index + 1}</td>
-                    <td>${ranking.worker1_name || '미등록'}</td>
-                    <td>${ranking.total_score || 0}</td>
-                    <td>${ranking.workdays_in_month || 0}</td>
-                    <td>${ranking.month}</td>
-                    <td>${ranking.total_conversions || 0}</td>
-                    `;
+        rankings.forEach((ranking, index) => {
+            // worker_name에 대한 처리
+            if (ranking.worker_name) {
+                if (!workers[ranking.worker_name]) {
+                    workers[ranking.worker_name] = {
+                        worker_name: ranking.worker_name,
+                        total_score: 0,
+                        workdays_in_month: 0,
+                        months: new Set()
+                    };
+                }
 
-                tableBody.appendChild(row);
-            });
-        })
-        .catch(error => {
-            console.error('랭킹 데이터를 가져오는 중 오류:', error);
+                // 점수와 출근일수 합산
+                workers[ranking.worker_name].total_score += ranking.total_score || 0;
+                workers[ranking.worker_name].workdays_in_month += ranking.workdays_in_month || 0;
+                workers[ranking.worker_name].months.add(ranking.month);
+            }
         });
+
+        // 총점 기준으로 정렬
+        const sortedWorkers = Object.values(workers).sort((a, b) => b.total_score - a.total_score);
+
+        // 정렬된 데이터를 테이블에 추가
+        sortedWorkers.forEach((worker, index) => {
+            const row = document.createElement('tr');
+            row.innerHTML = `
+                <td>${index + 1}</td>
+                <td>${worker.worker_name}</td>
+                <td>${parseInt(worker.total_score)}</td>
+                <td>${worker.workdays_in_month}</td>
+                <td>${parseInt(worker.total_score)}</td> <!-- 추후 누적 점수로 구현 예정 -->
+            `;
+            tableBody.appendChild(row);
+        });
+    })
+    .catch(error => {
+        console.error('랭킹 데이터를 가져오는 중 오류:', error);
+    });
 
 
     // 로그아웃 버튼 이벤트

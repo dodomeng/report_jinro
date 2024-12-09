@@ -59,23 +59,22 @@
 	-- 뷰 생성
 	CREATE OR REPLACE VIEW Ranking_View AS
 	SELECT 
-		COALESCE(ANY_VALUE(u1.name), w.worker1_name) AS worker1_name,
-		COALESCE(ANY_VALUE(u2.name), w.worker2_name) AS worker2_name,
-		SUM(w.worker1_conversion + w.worker2_conversion) AS total_score,
-		COALESCE(ANY_VALUE(uw.workdays), 0) AS workdays_in_month,
-		YEAR(w.record_date) * 100 + MONTH(w.record_date) AS month,
-		SUM(w.worker1_conversion) + SUM(w.worker2_conversion) AS total_conversions,
-		MAX(w.record_date) AS latest_record_date
-	FROM Work_Records w
-	LEFT JOIN Users u1 ON w.worker1_name = u1.name
-	LEFT JOIN Users u2 ON w.worker2_name = u2.name
-	LEFT JOIN User_Workdays uw ON w.user_id = uw.user_id AND YEAR(w.record_date) * 100 + MONTH(w.record_date) = uw.month
-	GROUP BY 
-		YEAR(w.record_date), 
-		MONTH(w.record_date), 
-		w.worker1_name, 
-		w.worker2_name;
-
+		worker_name,  -- 작업자 이름
+		SUM(worker_conversion) AS total_score,  -- 전환수 합산
+		COUNT(DISTINCT DATE(record_date)) AS workdays_in_month,  -- 날짜별 출근 일수 (중복 제거)
+		YEAR(record_date) * 100 + MONTH(record_date) AS month,  -- 월 계산
+		MAX(record_date) AS latest_record_date  -- 가장 최신 기록 날짜
+	FROM (
+		-- worker1_name을 포함하는 경우
+		SELECT worker1_name AS worker_name, worker1_conversion AS worker_conversion, record_date, business_id, user_id
+		FROM Work_Records
+		UNION
+		-- worker2_name을 포함하는 경우
+		SELECT worker2_name AS worker_name, worker2_conversion AS worker_conversion, record_date, business_id, user_id
+		FROM Work_Records
+	) AS combined_worknames
+	GROUP BY worker_name, YEAR(record_date), MONTH(record_date)
+	ORDER BY total_score DESC;
 
 
 

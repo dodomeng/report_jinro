@@ -176,6 +176,12 @@ a {
 }
 
 
+.todayDate {
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.466);
+  background-color: #21397a;
+  color: #fff;
+}
+
 .bottom3 {
   display: flex;
   /* Flexbox 활성화 */
